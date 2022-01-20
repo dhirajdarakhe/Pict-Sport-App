@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "831748633013",
+    "project_id": "pict-sport",
+    "storage_bucket": "pict-sport.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831748633013:android:fea40b848654f35b91e9fc",
+        "android_client_info": {
+          "package_name": "com.example.psa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831748633013-k29vh16abnpshcj1vr15c2tahre7h2b5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjXVUeYk48oZ8tWmOkO9_uV5NHAxaELr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831748633013-k29vh16abnpshcj1vr15c2tahre7h2b5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
