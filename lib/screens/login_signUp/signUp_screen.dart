@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/home_screen.dart';
-import 'package:psa/screens/login_signUp/userInfo_screen.dart';
 import 'package:psa/services/authentication.dart';
 import 'package:psa/services/getUserData.dart';
 
@@ -13,7 +13,7 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
 
-  late String email, password;
+  late String email, password,name,misId;
 
   @override
   Widget build(BuildContext context) {
@@ -137,6 +137,53 @@ class _SignupState extends State<Signup> {
                                     CrossAxisAlignment.start,
                                     children: [
                                       const Text(
+                                        "Name",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                          // color: Colors.black87
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextFormField(
+                                        validator: (val) {
+                                          if (val!.length > 20) {
+                                            return "Name cannot be that long";
+                                          }
+                                        },
+                                        keyboardType:
+                                        TextInputType.text,
+                                        obscureText: false,
+                                        decoration: const InputDecoration(
+                                          prefixIcon: Icon(Icons.title),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 0, horizontal: 10),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey)),
+                                        ),
+                                        onChanged: (value) {
+                                          name = value;
+                                          UserDetails.name=name;
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        height: 30,
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
                                         "Password",
                                         style: TextStyle(
                                           fontSize: 15,
@@ -170,6 +217,53 @@ class _SignupState extends State<Signup> {
                                         ),
                                         onChanged: (value) {
                                           password = value;
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        height: 30,
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "MIS ID",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                          // color: Colors.black87
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextFormField(
+                                        validator: (val) {
+                                          if (val!.length > 23) {
+                                            return "MIS-ID cannot be that long";
+                                          }
+                                        },
+                                        keyboardType:
+                                        TextInputType.emailAddress,
+                                        obscureText: false,
+                                        decoration: const InputDecoration(
+                                          prefixIcon: Icon(Icons.email),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 0, horizontal: 10),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey)),
+                                        ),
+                                        onChanged: (value) {
+                                          misId = value;
+                                          UserDetails.misId=misId;
                                         },
                                       ),
                                       const SizedBox(
@@ -321,9 +415,9 @@ class _SignupState extends State<Signup> {
                              height: 50,
                            ),
                          ),
-                         /*IconButton(
+                        /* IconButton(
                            onPressed: () {
-                             AuthenticationHelper().microsoftSignIn(
+                             Authentication().microsoftSignIn(
                                  "microsoft.com",
                                  ["email openid"],
                                  {'language': 'en'}).then((result) {
@@ -336,7 +430,7 @@ class _SignupState extends State<Signup> {
                                  Navigator.pushReplacement(
                                      context,
                                      MaterialPageRoute(
-                                         builder: (context) => UserInfo()));
+                                         builder: (context) => HomeScreen()/*UserInfo()*/));
                                } else {
                                  ScaffoldMessenger.of(context)
                                      .showSnackBar(SnackBar(
@@ -349,7 +443,7 @@ class _SignupState extends State<Signup> {
                              });
                            },
                            icon: Image.asset(
-                             "assets/icons/microsoft1.png",
+                             "assets/microsoft1.png",
                              height: 50,
                            ),
                          ),*/

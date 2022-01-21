@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
+import 'package:firebase_auth_oauth/firebase_auth_oauth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:firebase_auth_oauth/firebase_auth_oauth.dart';
+import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/login_signUp/login_screen.dart';
 
 class Authentication
@@ -25,7 +25,11 @@ class Authentication
      .collection('User').doc(authResult.user.uid)
      .set({
        'email':email,
+       'name':UserDetails.name,
+       'misId':UserDetails.misId,
      });
+     UserDetails.email=email;
+
       return null;
     } on FirebaseAuthException catch (e) {
       return e.message;
@@ -61,7 +65,14 @@ class Authentication
       if (kIsWeb) {
         var googleProvider = GoogleAuthProvider();
         userCredential = await _auth.signInWithPopup(googleProvider);
+       // print(userCredential.user?.email);
+
+        /*FirebaseFirestore.instance
+        .collection('User').doc(userCredential.user?.uid).set({
+          'email': userCredential.user?.email,
+        });*/
       } else {
+        print('ggooggle');
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
         final GoogleSignInAuthentication googleAuth =
         await googleUser!.authentication;
@@ -71,6 +82,15 @@ class Authentication
         );
         userCredential = await _auth.signInWithCredential(googleAuthCredential);
         isuser = userCredential.additionalUserInfo!.isNewUser;
+        print(userCredential.user?.email);
+        FirebaseFirestore.instance
+        .collection('User')
+        .doc(userCredential.user?.uid).set({
+          'email': userCredential.user?.email,
+          'name':userCredential.user?.displayName,
+        });
+        UserDetails.email=userCredential.user?.email;
+        UserDetails.name=userCredential.user?.displayName;
       }
       return isuser;
     } catch (e) {
@@ -79,7 +99,7 @@ class Authentication
   }
 
   //microsoft sign in
-  /*Future microsoftSignIn(String provider, List<String> scopes,
+  Future microsoftSignIn(String provider, List<String> scopes,
       Map<String, String> parameters) async {
     bool isNewUser = false;
     User? user;
@@ -98,5 +118,5 @@ class Authentication
     } on PlatformException catch (error) {
       return error;
     }
-  }*/
+  }
 }

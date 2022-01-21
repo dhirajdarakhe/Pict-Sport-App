@@ -306,7 +306,7 @@ class _LogInState extends State<LogIn> {
                          height: 50,
                        ),
                      ),
-                     /*IconButton(
+                    /* IconButton(
                        onPressed: () {
                          Authentication().microsoftSignIn(
                              "microsoft.com",
@@ -321,7 +321,7 @@ class _LogInState extends State<LogIn> {
                              Navigator.pushReplacement(
                                  context,
                                  MaterialPageRoute(
-                                     builder: (context) => UserInfo()));
+                                     builder: (context) => HomeScreen()/*UserInfo()*/));
                            } else {
                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                content: Text(
@@ -333,7 +333,7 @@ class _LogInState extends State<LogIn> {
                          });
                        },
                        icon: Image.asset(
-                         "assets/icons/microsoft1.png",
+                         "assets/microsoft1.png",
                          height: 50,
                        ),
                      ),*/
