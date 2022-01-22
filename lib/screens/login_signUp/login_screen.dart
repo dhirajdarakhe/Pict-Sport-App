@@ -4,7 +4,7 @@ import 'package:psa/screens/login_signUp/signUp_screen.dart';
 import 'package:psa/screens/login_signUp/userInfo_screen.dart';
 import 'package:psa/services/authentication.dart';
 import 'package:psa/services/getUserData.dart';
-
+/*
 class LogIn extends StatefulWidget {
   @override
   _LogInState createState() => _LogInState();
@@ -132,3 +132,4 @@ class _LogInState extends State<LogIn> {
     );
   }
 }
+*/

@@ -6,7 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:psa/models/userDetails.dart';
+import 'package:psa/screens/Home/home_screen.dart';
 import 'package:psa/screens/login_signUp/login_screen.dart';
+import 'package:psa/screens/login_signUp/signUp_screen.dart';
 
 class Authentication
 {
@@ -48,16 +50,18 @@ class Authentication
 
   //SIGN OUT METHOD
   Future signOut(context) async {
-    await _auth.signOut();
+    await GoogleSignIn().disconnect();
+    FirebaseAuth.instance.signOut();
+    //await _auth.signOut();
     print('signout');
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (BuildContext context) => LogIn()),
+        MaterialPageRoute(builder: (BuildContext context) => Signup()),
             (route) => false);
   }
 
   //google sign in
-  Future signInWithGoogle() async {
+  Future signInWithGoogle(context) async {
     late final isuser;
     try {
       // ignore: unused_local_variable
@@ -65,12 +69,13 @@ class Authentication
       if (kIsWeb) {
         var googleProvider = GoogleAuthProvider();
         userCredential = await _auth.signInWithPopup(googleProvider);
-       // print(userCredential.user?.email);
+       var currentUid=userCredential.user?.uid;
+       print(currentUid);
+       print('currr');
+        var u=FirebaseFirestore.instance.collection('User');
 
-        /*FirebaseFirestore.instance
-        .collection('User').doc(userCredential.user?.uid).set({
-          'email': userCredential.user?.email,
-        });*/
+       // if (currentUid==u.path)
+
       } else {
         print('ggooggle');
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -82,19 +87,27 @@ class Authentication
         );
         userCredential = await _auth.signInWithCredential(googleAuthCredential);
         isuser = userCredential.additionalUserInfo!.isNewUser;
-        print(userCredential.user?.email);
-        FirebaseFirestore.instance
-        .collection('User')
-        .doc(userCredential.user?.uid).set({
-          'email': userCredential.user?.email,
-          'name':userCredential.user?.displayName,
-          'photourl':userCredential.user?.photoURL,
-          'uid':userCredential.user?.uid,
-        });
-        UserDetails.uid=userCredential.user?.uid;
-        UserDetails.email=userCredential.user?.email;
-        UserDetails.photourl=userCredential.user?.photoURL;
-        UserDetails.name=userCredential.user?.displayName;
+        if (UserDetails.uid!=userCredential.user?.uid){
+          FirebaseFirestore.instance
+              .collection('User')
+              .doc(userCredential.user?.uid).set({
+            'email': userCredential.user?.email,
+            'name':userCredential.user?.displayName,
+            'photourl':userCredential.user?.photoURL,
+            'uid':userCredential.user?.uid,
+          });
+          UserDetails.uid=userCredential.user?.uid;
+          UserDetails.email=userCredential.user?.email;
+          UserDetails.photourl=userCredential.user?.photoURL;
+          UserDetails.name=userCredential.user?.displayName;
+          print('eyyy');
+        }else{
+          print('Already a user!');
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+            return HomeScreen();
+          }));
+        }
+
       }
       return isuser;
     } catch (e) {

@@ -46,7 +46,7 @@ class _SignupState extends State<Signup> {
                 GestureDetector(
                   onTap: (){
                       Authentication()
-                          .signInWithGoogle()
+                          .signInWithGoogle(context)
                           .then((result) {
                         if (result == false) {
                           Navigator.pushReplacement(
@@ -91,7 +91,7 @@ class _SignupState extends State<Signup> {
                               ),
                             ),
                             const SizedBox(width: 5,),
-                            const Text('Sign Up With Google',style: TextStyle(
+                            const Text('Sign In With Google',style: TextStyle(
                               color: Color(0xFFCE93D8),
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -101,29 +101,6 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 60,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Already have an account?',style:TextStyle(
-                      color: Color(0xFF616161),
-                      fontSize: 19,
-                    ),),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return LogIn();
-                        }));
-                      },
-                      child: const Text('Login',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF212121),
-                          fontSize: 20,
-                        ),),
-                    ),
-                  ],
                 ),
               ],
             ),
