@@ -8,8 +8,10 @@ class UserDetails{
     'TableTennis':false,
     'Badminton': false,
     'Cricket':false,
-    'Football':false,
+    'FootBall':false,
+    'Chess':false,
     'Gym':false,
   };
   static String? uid;
+  static String? photourl;
 }

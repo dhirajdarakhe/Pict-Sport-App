@@ -88,8 +88,12 @@ class Authentication
         .doc(userCredential.user?.uid).set({
           'email': userCredential.user?.email,
           'name':userCredential.user?.displayName,
+          'photourl':userCredential.user?.photoURL,
+          'uid':userCredential.user?.uid,
         });
+        UserDetails.uid=userCredential.user?.uid;
         UserDetails.email=userCredential.user?.email;
+        UserDetails.photourl=userCredential.user?.photoURL;
         UserDetails.name=userCredential.user?.displayName;
       }
       return isuser;
@@ -110,12 +114,13 @@ class Authentication
       String creationTime = user.metadata.creationTime.toString();
       lastSignInTime = lastSignInTime.substring(0, lastSignInTime.length - 7);
       creationTime = creationTime.substring(0, creationTime.length - 7);
-      // print(lastSignInTime);
+       print(lastSignInTime);
       if (lastSignInTime == creationTime) {
         isNewUser = true;
       }
       return isNewUser;
     } on PlatformException catch (error) {
+      print(error);
       return error;
     }
   }

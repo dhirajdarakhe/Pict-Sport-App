@@ -27,6 +27,11 @@ class GetUserData extends StatelessWidget {
             Map<String, dynamic> data =
             snapshot.data!.data() as Map<String, dynamic>;
             UserDetails.email=data['email'].toString();
+            UserDetails.name=data['name'].toString();
+            UserDetails.misId=data['misId'].toString();
+            UserDetails.photourl=data['photourl'].toString();
+            UserDetails.uid=data['uid'].toString();
+            UserDetails.sportList=Map<String, bool?>.from(data['SportList']).cast<String, bool>();
             return HomeScreen();
           }
           return const Center(child: CircularProgressIndicator(),);

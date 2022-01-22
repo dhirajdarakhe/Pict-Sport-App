@@ -20,6 +20,8 @@ dependencies:
   firebase_messaging: ^11.2.5
   google_sign_in: ^5.2.3
   firebase_auth_oauth: ^1.1.0
+  progress_state_button: ^1.0.4
+
 
 dev_dependencies:
   flutter_test:

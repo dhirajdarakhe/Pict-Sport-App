@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Icon(
                 Icons.login_sharp,
                 color: Colors.blue,
@@ -46,15 +46,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       appBar: AppBar(
-        title: Text('HomeScreen',style: TextStyle(color: Colors.red),),
+        title: Text('HomeScreen',style: const TextStyle(color: Colors.red),),
       ),
       body: Center(
         child: Container(
           color: Colors.blue.withOpacity(0.2),
-          child: Text('Welcome to PICT SPORT APP',style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-          ),),
+          child: GestureDetector(
+            onTap: (){
+            },
+            child: const Text('Welcome to PICT SPORT APP',style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),),
+          ),
         ),
       ),
     );
