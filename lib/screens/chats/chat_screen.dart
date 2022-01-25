@@ -13,7 +13,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Container(
       child: const Center(
         child: Text('CHats Screen',style: TextStyle(
-          color: Colors.green,
+          color: Colors.white,
           fontSize: 20,
         ),),
       ),

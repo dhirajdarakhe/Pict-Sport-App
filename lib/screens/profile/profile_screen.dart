@@ -13,7 +13,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
     return Container(
       child: const Center(
         child: Text('Profile Screen',style: TextStyle(
-          color: Colors.green,
+          color: Colors.white,
           fontSize: 20,
         ),),
       ),

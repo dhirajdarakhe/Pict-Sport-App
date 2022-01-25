@@ -13,7 +13,7 @@ class _Announcement_ScreenState extends State<Announcement_Screen> {
     return Container(
       child: const Center(
         child: Text('Announcement Screen',style: TextStyle(
-          color: Colors.green,
+          color: Colors.white,
           fontSize: 20,
         ),),
       ),

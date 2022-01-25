@@ -13,7 +13,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Container(
       child: const Center(
         child: Text('Calnder',style: TextStyle(
-          color: Colors.green,
+          color: Colors.white,
           fontSize: 20,
         ),),
       ),
