@@ -6,8 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/Home/home_screen.dart';
-import 'package:psa/screens/login_signUp/login_screen.dart';
+import 'package:psa/screens/intial_page.dart';
 import 'package:psa/screens/login_signUp/signUp_screen.dart';
 
 class Authentication
@@ -104,7 +103,7 @@ class Authentication
         }else{
           print('Already a user!');
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-            return HomeScreen();
+            return IntialScreen();
           }));
         }
 

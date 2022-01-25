@@ -1,9 +1,8 @@
 import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/Home/home_screen.dart';
+import 'package:psa/screens/intial_page.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
@@ -415,7 +414,7 @@ class _UserInfoState extends State<UserInfo> {
                           'SportList': UserDetails.sportList,
                         });
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                         return HomeScreen();
+                         return IntialScreen();
                         }));
                       }
                     },
