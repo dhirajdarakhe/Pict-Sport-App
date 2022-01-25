@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:psa/screens/login_signUp/login_screen.dart';
 import 'package:psa/screens/login_signUp/signUp_screen.dart';
 import 'package:psa/services/getUserData.dart';
 

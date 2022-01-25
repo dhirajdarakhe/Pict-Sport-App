@@ -99,11 +99,7 @@ class _IntialScreenState extends State<IntialScreen> {
               duration: const Duration(milliseconds: 500), curve: Curves.ease);
         }),
         items: const [
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.notifications,
-              ),
-              label: 'Notification'),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications,), label: 'Notification'),
           // BottomNavigationBarItem(icon: Icon(Icons.leaderboard),label: 'leaderboard'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
