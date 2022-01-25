@@ -17,10 +17,9 @@ dependencies:
   firebase_storage: ^10.2.5
   firebase_auth: ^3.3.5
   image_picker: ^0.8.4+4
-  firebase_messaging: ^11.2.5
   google_sign_in: ^5.2.3
   firebase_auth_oauth: ^1.1.0
-  progress_state_button: ^1.0.4
+  flutter_snake_navigationbar: ^0.6.0
 
 
 dev_dependencies:
