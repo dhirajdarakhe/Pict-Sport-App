@@ -405,7 +405,7 @@ class _UserInfoState extends State<UserInfo> {
                         if (_badminton){
                           UserDetails.sportList?.update('Badminton', (value) => true);
                         }
-
+                        UserDetails.misId=misId;
                         FirebaseFirestore.instance
                         .collection('User')
                         .doc(UserDetails.uid)

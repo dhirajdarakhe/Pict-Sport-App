@@ -61,6 +61,7 @@ class Authentication
 
   //google sign in
   Future signInWithGoogle(context) async {
+    print('starting');
     late final isuser;
     try {
       // ignore: unused_local_variable
@@ -102,6 +103,13 @@ class Authentication
           print('eyyy');
         }else{
           print('Already a user!');
+          FirebaseFirestore.instance
+              .collection('User')
+              .doc(UserDetails.uid)
+              .update({
+            'misId':UserDetails.misId,
+            'SportList': UserDetails.sportList,
+          });
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
             return IntialScreen();
           }));
