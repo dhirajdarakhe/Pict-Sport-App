@@ -53,7 +53,7 @@ class SportGrpNameWidget extends StatelessWidget {
             Text(name,style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
-              fontSize: 17,
+              fontSize: 20,
             ),),
           ],
         ),

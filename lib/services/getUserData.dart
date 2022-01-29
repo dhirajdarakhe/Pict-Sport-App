@@ -5,6 +5,8 @@ import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/home_screen.dart';
 import 'package:psa/screens/intial_page.dart';
 
+import 'UpdateUserInfo.dart';
+
 class GetUserData extends StatelessWidget {
   late String documentId;
 
@@ -33,6 +35,7 @@ class GetUserData extends StatelessWidget {
             UserDetails.photourl=data['photourl'].toString();
             UserDetails.uid=data['uid'].toString();
             UserDetails.sportList=Map<String, bool?>.from(data['SportList']).cast<String, bool>();
+            CheckMySportList();
             return IntialScreen();
           }
           return const Center(child: CircularProgressIndicator(),);
