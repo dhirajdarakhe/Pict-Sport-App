@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/intial_page.dart';
+import 'package:psa/services/UpdateUserInfo.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
@@ -405,6 +406,7 @@ class _UserInfoState extends State<UserInfo> {
                         if (_badminton){
                           UserDetails.sportList?.update('Badminton', (value) => true);
                         }
+                        CheckMySportList();
                         UserDetails.misId=misId;
                         FirebaseFirestore.instance
                         .collection('User')
