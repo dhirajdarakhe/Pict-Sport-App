@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
+import 'package:psa/models/userDetails.dart';
 
 class MessageBubble extends StatefulWidget {
   MessageBubble(this.message, this.time,this.isMe, this.username, this.userImage,
@@ -50,11 +51,15 @@ class _MessageBubbleState extends State<MessageBubble> {
       child: Row(
         mainAxisAlignment:
         widget.isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          widget.isMe?Container():CircleAvatar(
+            backgroundImage: NetworkImage(widget.userImage),
+          ),
           Bubble(
             stick: true,
             nip: widget.isMe? BubbleNip.rightTop:BubbleNip.leftTop,
-            margin: const BubbleEdges.only(top: 13,left: 6,right: 6),
+            margin: const BubbleEdges.only(top: 15,left: 6,right: 6),
             color: widget.isMe ? Colors.grey[300] : Colors.orangeAccent,
             child: Container(
               decoration: BoxDecoration(
@@ -83,7 +88,7 @@ class _MessageBubbleState extends State<MessageBubble> {
                         //textAlign: widget.isMe?TextAlign.start:TextAlign.start,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: widget.isMe ? Colors.blue : Colors.white,
+                          color: widget.isMe ? Colors.blue : Colors.brown.withOpacity(0.7),
                         ),
                       ),
                       Text(
@@ -100,14 +105,17 @@ class _MessageBubbleState extends State<MessageBubble> {
                     minute<10?'$hour:0$minute $gb':
                     '$hour:$minute $gb',
                     //textAlign: widget.isMe?TextAlign.end:TextAlign.end,
-                    style: const TextStyle(
-                      color: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.5),
                     ),
                   )
                 ],
               ),
             ),
           ),
+          widget.isMe?CircleAvatar(
+            backgroundImage: NetworkImage(UserDetails.photourl.toString()),
+          ):Container(),
         ],
       ),
     );

@@ -37,17 +37,29 @@ class _NewMessageState extends State<NewMessage> {
     return Container(
       margin: const EdgeInsets.only(top: 8),
       padding: const EdgeInsets.all(8),
+      //color: Colors.green,
       child: Row(
         children: <Widget>[
           Expanded(
             child: TextField(
+              //focusNode: widget.focusNode,
               controller: _controller,
+              textCapitalization: TextCapitalization.sentences,
+              autocorrect: true,
+              enableSuggestions: true,
               keyboardType: TextInputType.multiline,
               maxLines:2,
-              decoration: const InputDecoration(
-                /*labelStyle: TextStyle(
-                  color: Colors.white,
-                ),*/
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue, width: 1.5),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue, width: 0.0),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                filled: true,
+                fillColor: Colors.grey[100],
                 labelText: 'Send a message...',),
               onChanged: (value) {
                 setState(() {
@@ -56,13 +68,18 @@ class _NewMessageState extends State<NewMessage> {
               },
             ),
           ),
-          IconButton(
-            color: Theme.of(context).primaryColor,
-            icon: const Icon(
-              Icons.send,
+          const SizedBox(width: 20,),
+          GestureDetector(
+            onTap: _enteredMessage.trim().isEmpty ? null : _sendMessage,
+            child:  Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.blue,
+              ),
+              child: const Icon(Icons.send, color: Colors.white),
             ),
-            onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
-          )
+          ),
         ],
       ),
     );
