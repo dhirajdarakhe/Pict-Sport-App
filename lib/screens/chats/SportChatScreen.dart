@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:psa/screens/chats/chat_members.dart';
 import 'messages.dart';
 import 'newMessage.dart';
 import 'package:swipe_to/swipe_to.dart';
@@ -61,25 +62,41 @@ class _SportChatScreenState extends State<SportChatScreen> {
                 color: Colors.blue,
                 width: double.infinity,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.of(context).pop();
-                        },
-                          child: const Icon(Icons.arrow_back,
-                            size: 30,color: Colors.white,)),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.of(context).pop();
+                            },
+                              child: const Icon(Icons.arrow_back,
+                                size: 30,color: Colors.white,)),
+                        ),
+                        const SizedBox(width: 10,),
+                        Text(
+                            _productId.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 10,),
-                    Text(
-                        _productId.toString(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: GestureDetector(
+                          onTap: (){
+                            /*Navigator.push(context, MaterialPageRoute(builder: (context){
+                              return ChatMembers();
+                            }));*/
+                          },
+                          child: const Icon(Icons.group_add_outlined,
+                            size: 30,color: Colors.white,)),
                     ),
                   ],
                 ),
