@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'messages.dart';
 import 'newMessage.dart';
+import 'package:swipe_to/swipe_to.dart';
 
 class SportChatScreen extends StatefulWidget {
   const SportChatScreen({Key? key}) : super(key: key);
@@ -12,7 +13,15 @@ class SportChatScreen extends StatefulWidget {
 
 class _SportChatScreenState extends State<SportChatScreen> {
   bool _isInit=true;
+  final focusNode=FocusNode();
+  Messages? replyMessage;
   var _productId,_key;
+
+  void replyToMessage(Messages message) {
+    setState(() {
+      replyMessage=message;
+    });
+  }
   @override
   void didChangeDependencies(){
    if (_isInit){
@@ -20,7 +29,7 @@ class _SportChatScreenState extends State<SportChatScreen> {
      if (_productId=='BasketBall'){
        _key='BB';
      }else if (_productId=='VolleyBall'){
-       _key='FF';
+       _key='VB';
      }else if (_productId=='TableTennis'){
        _key='TT';
      }else if (_productId=='Badminton'){
@@ -39,22 +48,58 @@ class _SportChatScreenState extends State<SportChatScreen> {
     super.didChangeDependencies();
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //backgroundColor: Colors.black12,
-      appBar: AppBar(
-        title: Text(_productId.toString(),style: const TextStyle(
-          color: Colors.black,
-        ),),
-        centerTitle: true,
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: Colors.blue,
-      ),
-      body: Container(
-        child: Column(
+        body: Column(
           children: [
-           Expanded(child: Messages(_key)),
-            NewMessage(keyies: _key,),
+            Expanded(child: Center(
+              child: Container(
+                color: Colors.blue,
+                width: double.infinity,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).pop();
+                        },
+                          child: const Icon(Icons.arrow_back,
+                            size: 30,color: Colors.white,)),
+                    ),
+                    const SizedBox(width: 10,),
+                    Text(
+                        _productId.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )),
+            Expanded(
+              flex: 9,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),
+                ),
+                child: Column(
+                  children: [
+                   Expanded(child: Messages(uniqueValue: _key,)),
+                    NewMessage(keyies: _key,),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

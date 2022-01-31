@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:swipe_to/swipe_to.dart';
 import 'messageBubble.dart';
 
 class Messages extends StatelessWidget {
 
-  var _uniqueValue;
-  Messages(this._uniqueValue);
+  var uniqueValue;
+  Messages({required this.uniqueValue});
+
   @override
   Widget build(BuildContext context) {
     User? user= FirebaseAuth.instance.currentUser;
@@ -14,7 +16,7 @@ class Messages extends StatelessWidget {
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('SportsGroup')
-        .doc(_uniqueValue.toString())
+        .doc(uniqueValue.toString())
         .collection('Chat')
             .orderBy(
           'createdAt',
@@ -29,15 +31,19 @@ class Messages extends StatelessWidget {
           }
           final chatDocs = chatSnapshot.data!.docs;
           return ListView.builder(
+            physics: const BouncingScrollPhysics(),
             reverse: true,
             itemCount: chatDocs.length,
-            itemBuilder: (ctx, index) => MessageBubble(
-              chatDocs[index]['text'],
-              chatDocs[index]['createdAt'],
-              chatDocs[index]['userId'] == user?.uid,
-              chatDocs[index]['username'],
-              chatDocs[index]['userImage'],
-              key: ValueKey(chatDocs[index].id),
+            itemBuilder: (ctx, index) => SwipeTo(
+              onRightSwipe: (){},
+              child: MessageBubble(
+                chatDocs[index]['text'],
+                chatDocs[index]['createdAt'],
+                chatDocs[index]['userId'] == user?.uid,
+                chatDocs[index]['username'],
+                chatDocs[index]['userImage'],
+                key: ValueKey(chatDocs[index].id),
+              ),
             ),
           );
         });

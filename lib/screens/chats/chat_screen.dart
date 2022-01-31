@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/chats/SportChatScreen.dart';
@@ -25,6 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
           child: ListView.builder(
             itemCount: UserDetails.mySportsList!.length,
               itemBuilder: (ctx, index) => SportGrpNameWidget(
+                lastMsg: '3:22 PM   ',
                 onTap: (){
                   Navigator.of(context)
                       .pushNamed(SportChatScreen.routeName,
@@ -40,9 +39,9 @@ class _ChatScreenState extends State<ChatScreen> {
 }
 
 class SportGrpNameWidget extends StatelessWidget {
-  late String name,imag;
+  late String name,imag,lastMsg;
   VoidCallback onTap;
-  SportGrpNameWidget({required this.onTap,required this.name,required this.imag});
+  SportGrpNameWidget({required this.lastMsg,required this.onTap,required this.name,required this.imag});
 
   @override
   Widget build(BuildContext context) {
@@ -53,20 +52,33 @@ class SportGrpNameWidget extends StatelessWidget {
         child: Container(
           height: 55,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  imag,
-                  style: const TextStyle(fontSize: 30),
-                ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      imag,
+                      style: const TextStyle(fontSize: 30),
+                    ),
+                  ),
+                  const SizedBox(width: 10,),
+                  Text(name,style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),),
+                ],
               ),
-              const SizedBox(width: 10,),
-              Text(name,style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),),
+              Padding(
+                padding: const EdgeInsets.only(),
+                child: Text(lastMsg,style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),),
+              ),
             ],
           ),
           decoration: BoxDecoration(
