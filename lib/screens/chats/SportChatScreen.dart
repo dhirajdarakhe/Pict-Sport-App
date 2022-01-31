@@ -48,7 +48,7 @@ class _SportChatScreenState extends State<SportChatScreen> {
           color: Colors.black,
         ),),
         centerTitle: true,
-        backgroundColor: Colors.white70,
+        backgroundColor: Colors.blue,
       ),
       body: Container(
         child: Column(

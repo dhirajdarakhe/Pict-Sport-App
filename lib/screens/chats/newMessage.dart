@@ -42,6 +42,8 @@ class _NewMessageState extends State<NewMessage> {
           Expanded(
             child: TextField(
               controller: _controller,
+              keyboardType: TextInputType.multiline,
+              maxLines:2,
               decoration: const InputDecoration(
                 /*labelStyle: TextStyle(
                   color: Colors.white,

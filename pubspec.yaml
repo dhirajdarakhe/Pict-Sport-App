@@ -20,6 +20,7 @@ dependencies:
   google_sign_in: ^5.2.3
   firebase_auth_oauth: ^1.1.0
   flutter_snake_navigationbar: ^0.6.0
+  bubble: ^1.2.1
 
 
 dev_dependencies:

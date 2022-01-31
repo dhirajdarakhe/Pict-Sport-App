@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:bubble/bubble.dart';
 
 class MessageBubble extends StatefulWidget {
   MessageBubble(this.message, this.time,this.isMe, this.username, this.userImage,
@@ -43,15 +44,21 @@ class _MessageBubbleState extends State<MessageBubble> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Row(
-          mainAxisAlignment:
-          widget.isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
+    double width=MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.only(left: 8,right: 8),
+      child: Row(
+        mainAxisAlignment:
+        widget.isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: <Widget>[
+          Bubble(
+            stick: true,
+            nip: widget.isMe? BubbleNip.rightTop:BubbleNip.leftTop,
+            margin: const BubbleEdges.only(top: 13,left: 6,right: 6),
+            color: widget.isMe ? Colors.grey[300] : Colors.orangeAccent,
+            child: Container(
               decoration: BoxDecoration(
-                color: widget.isMe ? Colors.grey[300] : Colors.orangeAccent,
+               // color: widget.isMe ? Colors.grey[300] : Colors.orangeAccent,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(12),
                   topRight: const Radius.circular(12),
@@ -63,37 +70,36 @@ class _MessageBubbleState extends State<MessageBubble> {
                       : const Radius.circular(12),
                 ),
               ),
-              width: 140,
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 16,
-              ),
-              margin: const EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: 8,
-              ),
               child: Column(
-                crossAxisAlignment:
-                widget.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                crossAxisAlignment:widget.isMe? CrossAxisAlignment.start:CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    widget.username,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: widget.isMe ? Colors.blue : Colors.white,
-                    ),
+                  Column(
+                    crossAxisAlignment:
+                    widget.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                    //crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                     widget.isMe?Container(): Text(
+                        widget.username,
+                        //textAlign: widget.isMe?TextAlign.start:TextAlign.start,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: widget.isMe ? Colors.blue : Colors.white,
+                        ),
+                      ),
+                      Text(
+                        widget.message,
+                        textAlign: widget.isMe ? TextAlign.start : TextAlign.start,
+                        style: TextStyle(
+                          color: widget.isMe ? Colors.blue : Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 2,),
                   Text(
-                    widget.message,
-                    textAlign: widget.isMe ? TextAlign.end : TextAlign.start,
-                    style: TextStyle(
-                      color: widget.isMe ? Colors.blue : Colors.white,
-                    ),
-                  ),
-                  Text(
+                    minute<10?'$hour:0$minute $gb':
                     '$hour:$minute $gb',
-                    //'hour+':'+minute+'_'+gb',
-                    textAlign: widget.isMe ? TextAlign.start : TextAlign.end,
+                    //textAlign: widget.isMe?TextAlign.end:TextAlign.end,
                     style: const TextStyle(
                       color: Colors.black,
                     ),
@@ -101,20 +107,9 @@ class _MessageBubbleState extends State<MessageBubble> {
                 ],
               ),
             ),
-          ],
-        ),
-        Positioned(
-          top: 0,
-          left: widget.isMe ? null : 120,
-          right: widget.isMe ? 120 : null,
-          child: CircleAvatar(
-            backgroundImage: NetworkImage(
-              widget.userImage,
-            ),
           ),
-        ),
-      ],
-      overflow: Overflow.visible,
+        ],
+      ),
     );
   }
 }

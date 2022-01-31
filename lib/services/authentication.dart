@@ -14,39 +14,6 @@ class Authentication
   final FirebaseAuth _auth = FirebaseAuth.instance;
   get user => _auth.currentUser;
 
-  //SIGN UP METHOD
-  Future signUp({required String email, required String password}) async {
-    var authResult;
-    try {
-     authResult= await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-     FirebaseFirestore.instance
-     .collection('User').doc(authResult.user.uid)
-     .set({
-       'email':email,
-       'name':UserDetails.name,
-       'misId':UserDetails.misId,
-     });
-     UserDetails.email=email;
-
-      return null;
-    } on FirebaseAuthException catch (e) {
-      return e.message;
-    }
-  }
-
-  //SIGN IN METHOD
-  Future signIn({required String email, required String password}) async {
-    try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-      return null;
-    } on FirebaseAuthException catch (e) {
-      return e.message;
-    }
-  }
-
   //SIGN OUT METHOD
   Future signOut(context) async {
     await GoogleSignIn().disconnect();
@@ -69,13 +36,34 @@ class Authentication
       if (kIsWeb) {
         var googleProvider = GoogleAuthProvider();
         userCredential = await _auth.signInWithPopup(googleProvider);
-       var currentUid=userCredential.user?.uid;
-       print(currentUid);
-       print('currr');
-        var u=FirebaseFirestore.instance.collection('User');
+      } else {
+        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+        final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
+        final googleAuthCredential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        userCredential = await _auth.signInWithCredential(googleAuthCredential);
+        isuser = userCredential.additionalUserInfo!.isNewUser;
+      }
+      return isuser;
+    } catch (e) {
+      return e;
+    }
+  }
 
-       // if (currentUid==u.path)
-
+  /*
+  *  //google sign in
+  Future signInWithGoogle(context) async {
+    print('starting');
+    late final isuser;
+    try {
+      // ignore: unused_local_variable
+      UserCredential userCredential;
+      if (kIsWeb) {
+        var googleProvider = GoogleAuthProvider();
+        userCredential = await _auth.signInWithPopup(googleProvider);
       } else {
         print('ggooggle');
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -87,6 +75,8 @@ class Authentication
         );
         userCredential = await _auth.signInWithCredential(googleAuthCredential);
         isuser = userCredential.additionalUserInfo!.isNewUser;
+        //isLogined();
+
         if (UserDetails.uid!=userCredential.user?.uid){
           FirebaseFirestore.instance
               .collection('User')
@@ -122,6 +112,7 @@ class Authentication
       return e;
     }
   }
+  * */
 
   //microsoft sign in
   Future microsoftSignIn(String provider, List<String> scopes,
@@ -145,4 +136,6 @@ class Authentication
       return error;
     }
   }
+
+
 }
