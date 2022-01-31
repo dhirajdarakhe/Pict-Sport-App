@@ -45,29 +45,29 @@ class _SignupState extends State<Signup> {
                 const SizedBox(height: 30,),
                 GestureDetector(
                   onTap: (){
-                      Authentication()
-                          .signInWithGoogle(context)
-                          .then((result) {
-                        if (result == false) {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => GetUserData()));
-                        } else if (result == true) {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UserInfo()));
-                        } else {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(
-                            content: Text(
-                              result,
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ));
-                        }
-                      });
+                    Authentication()
+                        .signInWithGoogle(context)
+                        .then((result) {
+                      if (result == false) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GetUserData()));
+                      } else if (result == true) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UserInfo()));
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(
+                          content: Text(
+                            result,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ));
+                      }
+                    });
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 30,right: 30),

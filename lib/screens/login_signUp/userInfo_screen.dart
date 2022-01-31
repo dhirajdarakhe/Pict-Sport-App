@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/intial_page.dart';
@@ -16,6 +17,16 @@ class _UserInfoState extends State<UserInfo> {
   bool _basketball=false,_cricket=false,_football=false,_badminton=false,
   _volleyball=false,_chess=false,_gym=false,_tabletennis=false;
   String misId='';
+  Map<String,bool>? m={
+    'BasketBall':false, //🏀 BB
+    'VolleyBall':false,//🏐 VB
+    'TableTennis':false,  //🎾 TT
+    'Badminton': false,//🏸  BT
+    'Cricket':false,//🏏  CR
+    'FootBall':false,//⚽ FB
+    'Chess':false,//♟️ CH
+    'Gym':false,//💪 GY
+  };
 
   Widget onClick(bool onp){
     return onp?const Icon(Icons.check_circle,
@@ -383,37 +394,41 @@ class _UserInfoState extends State<UserInfo> {
                       }else{
                         //print(UserDetails.sportList?.update(key, (value) => false));
                         if (_basketball){
-                          UserDetails.sportList?.update('BasketBall', (value) => true);
+                          m?.update('BasketBall', (value) => true);
                         }
                         if (_football){
-                          UserDetails.sportList?.update('FootBall', (value) => true);
+                          m?.update('FootBall', (value) => true);
                         }
                         if (_volleyball){
-                          UserDetails.sportList?.update('VolleyBall', (value) => true);
+                          m?.update('VolleyBall', (value) => true);
                         }
                         if (_cricket){
-                          UserDetails.sportList?.update('Cricket', (value) => true);
+                          m?.update('Cricket', (value) => true);
                         }
                         if (_chess){
-                          UserDetails.sportList?.update('Chess', (value) => true);
+                          m?.update('Chess', (value) => true);
                         }
                         if (_gym){
-                          UserDetails.sportList?.update('Gym', (value) => true);
+                          m?.update('Gym', (value) => true);
                         }
                         if (_tabletennis){
-                          UserDetails.sportList?.update('TableTennis', (value) => true);
+                          m?.update('TableTennis', (value) => true);
                         }
                         if (_badminton){
-                          UserDetails.sportList?.update('Badminton', (value) => true);
+                          m?.update('Badminton', (value) => true);
                         }
-                        CheckMySportList();
-                        UserDetails.misId=misId;
+                        User? user = FirebaseAuth.instance.currentUser;
+                        var uid=user?.uid;
                         FirebaseFirestore.instance
                         .collection('User')
-                        .doc(UserDetails.uid)
-                        .update({
+                        .doc(uid)
+                        .set({
+                          'name':user?.displayName,
+                          'photourl':user?.photoURL,
+                          'email':user?.email,
+                          'uid':user?.uid,
                           'misId':misId,
-                          'SportList': UserDetails.sportList,
+                          'SportList': m,
                         });
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
                          return IntialScreen();
