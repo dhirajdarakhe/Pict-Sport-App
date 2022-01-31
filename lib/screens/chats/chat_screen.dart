@@ -21,7 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
         const SizedBox(height: 80,),
         Expanded(
           child: ListView.builder(
-            itemCount: UserDetails.mySportsList!.length,
+              itemCount: UserDetails.mySportsList!.length,
               itemBuilder: (ctx, index) => SportGrpNameWidget(
                 lastMsg: '3:22 PM   ',
                 onTap: (){
