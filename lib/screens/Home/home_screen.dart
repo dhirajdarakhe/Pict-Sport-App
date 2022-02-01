@@ -13,8 +13,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Container(
         child: const Center(
-          child: Text('Home Screen',style: TextStyle(color: Colors.white,fontSize: 20,),),
+          child: Text('Home Screen',
+            style: TextStyle(color: Colors.white,fontSize: 20,),),
         ),
       );
+    //arthssjsj
   }
 }
