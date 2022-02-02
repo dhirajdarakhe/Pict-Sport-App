@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:psa/screens/chats/SportChatScreen.dart';
+import 'package:psa/screens/chats/chat_members.dart';
 import 'package:psa/screens/chats/chat_screen.dart';
 import 'package:psa/screens/login_signUp/signUp_screen.dart';
 import 'package:psa/services/getUserData.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         home: GetUserData(),
         routes: {
           SportChatScreen.routeName: (ctx)=>SportChatScreen(),
+          ChatMembers.routeName: (ctx)=>ChatMembers(),
         },
       );
     }else{
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
         home: Signup(),
         routes: {
           SportChatScreen.routeName: (ctx)=>SportChatScreen(),
+          ChatMembers.routeName: (ctx)=>ChatMembers(),
         },
       );
     }

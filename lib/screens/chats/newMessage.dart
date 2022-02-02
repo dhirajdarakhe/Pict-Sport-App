@@ -64,6 +64,7 @@ class _NewMessageState extends State<NewMessage> {
               onChanged: (value) {
                 setState(() {
                   _enteredMessage = value;
+
                 });
               },
             ),
