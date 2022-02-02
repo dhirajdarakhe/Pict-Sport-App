@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:psa/screens/profile/sports_card.dart';
 import 'card1.dart';
-import 'card2.dart';
 import 'check.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -34,6 +34,11 @@ class _Profile_ScreenState extends State<Profile_Screen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      /*appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: const Text('',),
+      ),*/
       body: SafeArea(
         child: Container(
             height: double.infinity,
@@ -121,7 +126,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                       social(
                           FaIcon(FontAwesomeIcons.snapchatGhost), 'Snapchat'),
                     ]),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Divider(
@@ -129,25 +134,25 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                   thickness: 2,
                   color: Colors.grey[100],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 container1('emoji.png', 'About Me', 'Hello I Am Omkar', 65, 65),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 container1('mag.png', 'Roll Number', '21107', 50, 50),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 container1('cupcak.png', 'Birthday', '10/01/2002', 50, 50),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 container2(),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 container1('mail.png', 'Email', 'abc.xyz.com', 50, 50),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 container1('link.png', 'MIS ID', 'c2kobckeuu', 65, 65),
