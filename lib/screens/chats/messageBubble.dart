@@ -62,6 +62,7 @@ class _MessageBubbleState extends State<MessageBubble> {
             margin: const BubbleEdges.only(top: 15,left: 6,right: 6),
             color: widget.isMe ? Colors.grey[300] : Colors.orangeAccent,
             child: Container(
+              width: widget.message.length<width-350? null:width-130,
               decoration: BoxDecoration(
                // color: widget.isMe ? Colors.grey[300] : Colors.orangeAccent,
                 borderRadius: BorderRadius.only(
@@ -118,6 +119,55 @@ class _MessageBubbleState extends State<MessageBubble> {
           ):Container(),
         ],
       ),
+    );
+  }
+}
+
+class MessageTile extends StatelessWidget {
+  MessageTile({required this.message, required this.isSendByMe});
+  final message;
+  final bool isSendByMe;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+          left: isSendByMe ? 0 : 24, right: isSendByMe ? 24 : 0),
+      margin: EdgeInsets.symmetric(vertical: 8),
+      alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
+      width: MediaQuery.of(context).size.height,
+      child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 17),
+          decoration: BoxDecoration(
+              borderRadius: isSendByMe
+                  ? BorderRadius.only(
+                topLeft: Radius.circular(23),
+                topRight: Radius.circular(23),
+                bottomLeft: Radius.circular(23),
+              )
+                  : BorderRadius.only(
+                topLeft: Radius.circular(23),
+                topRight: Radius.circular(23),
+                bottomRight: Radius.circular(23),
+              ),
+              gradient:
+              isSendByMe ?  LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Colors.purple, Colors.purple]) :
+              LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Colors.lightGreen, Colors.lightGreen])
+            // LinearGradient(
+            //     colors: isSendByMe ? [Colors.red] [Colors.red] : [Colors.blue][Colors.blue])
+          ),
+          child: Text(
+            message,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 17,
+            ),
+          )),
     );
   }
 }

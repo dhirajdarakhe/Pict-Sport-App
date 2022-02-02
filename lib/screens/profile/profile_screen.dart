@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/profile/sports_card.dart';
 import 'card1.dart';
 import 'check.dart';
@@ -34,11 +35,6 @@ class _Profile_ScreenState extends State<Profile_Screen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      /*appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text('',),
-      ),*/
       body: SafeArea(
         child: Container(
             height: double.infinity,
@@ -85,7 +81,8 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                       top: height / 5.2,
                       left: width * 0.2888,
                       child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/omkar.png'),
+                        backgroundImage:
+                            NetworkImage(UserDetails.photourl.toString()),
                         radius: 75,
                       )),
                 ]),
@@ -110,7 +107,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Omkar Awaje',
+                    UserDetails.name.toString(),
                     style: TextStyle(fontSize: 24),
                   ),
                 ),
@@ -137,7 +134,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                 const SizedBox(
                   height: 30,
                 ),
-                container1('emoji.png', 'About Me', 'Hello I Am Omkar', 65, 65),
+                container1('emoji.png', 'About Me', 'Hello I Am '+UserDetails.name.toString(), 65, 65),
                 const SizedBox(height: 10),
                 container1('mag.png', 'Roll Number', '21107', 50, 50),
                 const SizedBox(
@@ -151,11 +148,11 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                 const SizedBox(
                   height: 10,
                 ),
-                container1('mail.png', 'Email', 'abc.xyz.com', 50, 50),
+                container1('mail.png', 'Email', UserDetails.email.toString(), 50, 50),
                 const SizedBox(
                   height: 10,
                 ),
-                container1('link.png', 'MIS ID', 'c2kobckeuu', 65, 65),
+                container1('link.png', 'MIS ID',UserDetails.misId.toString(), 65, 65),
               ]),
             )),
       ),

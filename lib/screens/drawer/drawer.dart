@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
+import 'package:psa/screens/drawer/users.dart';
 import 'package:psa/services/authentication.dart';
 
 class App_Drawer extends StatefulWidget {
@@ -47,6 +48,17 @@ class _App_DrawerState extends State<App_Drawer> {
               },text: 'Logout',Icon:
               const Icon(
                 Icons.logout_outlined,
+                color: Colors.white,
+                size: 30,
+              ),),
+              const SizedBox(height: 15,),
+              DrawerRefactor(onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return AllUsers();
+                }));
+              },text: 'App Users',Icon:
+              const Icon(
+                Icons.person_add,
                 color: Colors.white,
                 size: 30,
               ),),

@@ -91,9 +91,7 @@ class _SportChatScreenState extends State<SportChatScreen> {
                       padding: const EdgeInsets.all(10.0),
                       child: GestureDetector(
                           onTap: (){
-                            /*Navigator.push(context, MaterialPageRoute(builder: (context){
-                              return ChatMembers();
-                            }));*/
+                            Navigator.of(context).pushNamed(ChatMembers.routeName,arguments: _productId);
                           },
                           child: const Icon(Icons.group_add_outlined,
                             size: 30,color: Colors.white,)),
