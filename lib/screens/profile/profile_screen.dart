@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'card1.dart';
+import 'card2.dart';
+import 'check.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Profile_Screen extends StatefulWidget {
   const Profile_Screen({Key? key}) : super(key: key);
