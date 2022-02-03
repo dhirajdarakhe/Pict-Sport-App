@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:psa/screens/calender/table_tennis/table_tannis_main_screen.dart';
 import 'package:psa/screens/chats/SportChatScreen.dart';
 import 'package:psa/screens/chats/chat_members.dart';
 import 'package:psa/screens/chats/chat_screen.dart';
@@ -19,7 +20,6 @@ Future isLoggedIn() async {
 
 class MyApp extends StatelessWidget {
   User? user = FirebaseAuth.instance.currentUser;
-
   @override
   Widget build(BuildContext context) {
     if (user!=null){
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         routes: {
           SportChatScreen.routeName: (ctx)=>SportChatScreen(),
           ChatMembers.routeName: (ctx)=>ChatMembers(),
+          TabletannisScreen.routeName : (ctx) => TabletannisScreen(),
         },
       );
     }else{
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         routes: {
           SportChatScreen.routeName: (ctx)=>SportChatScreen(),
           ChatMembers.routeName: (ctx)=>ChatMembers(),
+          TabletannisScreen.routeName : (ctx) => TabletannisScreen(),
         },
       );
     }

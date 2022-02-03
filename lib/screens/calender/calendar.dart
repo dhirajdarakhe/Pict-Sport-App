@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:psa/screens/calender/table_tennis/table_tannis_main_screen.dart';
+import 'package:psa/screens/calender/table_tennis/table_tennis_issue_screen.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -10,15 +12,20 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: const Center(
-        child: FlatButton(
-          onPressed: () {},
-          child: Text('Calnder',style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),),
-        ),
+    return Center(
+      child:FlatButton(
+        color: Colors.red,
+        onPressed: ()
+        {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+                return TabletannisScreen();
+              }));
+        },
+        child: const Text('Calendar',style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+        ),),
       ),
     );
   }

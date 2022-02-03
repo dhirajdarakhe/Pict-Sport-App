@@ -23,6 +23,11 @@ dependencies:
   flutter_snake_navigationbar: ^0.6.0
   bubble: ^1.2.1
   swipe_to: ^0.0.1+8
+  flutter_lints: ^1.0.0
+  fancy_containers: ^0.0.3
+  direct_select: ^2.0.0
+  dropdown_button2: ^1.1.1
+  lottie: ^1.2.1
 
 
 dev_dependencies:
