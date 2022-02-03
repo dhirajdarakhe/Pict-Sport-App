@@ -9,7 +9,7 @@ class UserDetails{
     'Badminton': false,//🏸  BT
     'Cricket':false,//🏏  CR
     'FootBall':false,//⚽ FB
-    'Chess':false,//♟️ CH
+    'Chess':false,//♟️CH
     'Gym':false,//💪 GY
   };
   static String? uid;
