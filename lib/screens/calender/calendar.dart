@@ -12,10 +12,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Container(
       child: const Center(
-        child: Text('Calnder',style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-        ),),
+        child: FlatButton(
+          onPressed: () {},
+          child: Text('Calnder',style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),),
+        ),
       ),
     );
   }
