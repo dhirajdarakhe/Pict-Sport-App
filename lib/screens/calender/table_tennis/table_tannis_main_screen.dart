@@ -14,7 +14,7 @@ class TabletannisScreen extends StatefulWidget {
 
 class _TabletannisScreenState extends State<TabletannisScreen> {
 
-  late bool _isRequested=true;
+  late int _isRequested=0;
   bool _isFirstVisit=false;
 
   Future getStatus()async{
@@ -24,9 +24,15 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
 
     if (v.exists){
       _isRequested=v.get('isRequested');
-      setState(() {
-        _isFirstVisit=false;
-      });
+      if (_isRequested==3){
+        setState(() {
+          _isFirstVisit=true;
+        });
+      }else{
+        setState(() {
+          _isFirstVisit=false;
+        });
+      }
       print('RRR');
       }
     else{
@@ -92,18 +98,38 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                     child:_isFirstVisit? const Text(
                             'Issue the Racked',
                             style: TextStyle(fontSize: 16),
-                          ):_isRequested? const Text(
+                          ):_isRequested==1? const Text(
                             'Requested',
                             style: TextStyle(fontSize: 16),
-                          ):const Text(
+                          ):_isRequested==2? const Text(
                       'Return the Racket',
                       style: TextStyle(fontSize: 16),
-                    ),
+                    ):Container(),
                     onPressed: () {
-                      /*Navigator.push(context,
+                      _isFirstVisit?Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return IssueTheRacket();
-                      }));*/
+                            return IssueTheRacket();
+                          })):_isRequested==1? showDialog(
+                          context: context,
+                          builder: (context) {
+                            return PopUpRequest(onTap: (){
+                              FirebaseFirestore.instance.collection('EquipmentIssuing')
+                                  .doc('TT').collection('Equipment')
+                                  .doc(UserDetails.uid).update({
+                                'isRequested':3,
+                              });
+                              setState(() {
+                                _isFirstVisit=true;
+                              });
+                              Navigator.pop(context);
+                            },
+                                text: 'Want to cancel the request'); //---------
+                          }):_isRequested==2?(){}:Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return IssueTheRacket();
+                          }));
+                      //-----------
+                      //2 ke liye
 
                     },
                   ),
