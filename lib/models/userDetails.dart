@@ -16,4 +16,6 @@ class UserDetails{
   static String? photourl;
   static List? mySportsList=[];
   static List? mySportEmoji=[];
+  bool isAdmin=false;
+
 }
