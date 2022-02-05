@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/intial_page.dart';
 import 'package:psa/services/UpdateUserInfo.dart';
+import 'package:psa/services/getUserData.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
@@ -427,9 +428,10 @@ class _UserInfoState extends State<UserInfo> {
                           'uid':user?.uid,
                           'misId':misId,
                           'SportList': m,
+                          'isAdmin':false,
                         });
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                         return IntialScreen();
+                         return GetUserData();
                         }));
                       }
                     },
