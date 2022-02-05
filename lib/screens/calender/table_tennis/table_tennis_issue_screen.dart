@@ -65,7 +65,7 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
         ),
       ));
     }else{
-      var d=FirebaseFirestore.instance.collection('EquipmentIssuing')
+      FirebaseFirestore.instance.collection('EquipmentIssuing')
       .doc('TT').collection('Equipment')
       .doc(UserDetails.uid).set({
         'tableNumber': choosedTable,
@@ -75,7 +75,9 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
         'misId':UserDetails.misId,
         'photourl':UserDetails.photourl,
         'isRequested':1,
+        'isReturn':false,
       });
+
       setState(() {
         //requested=true;
       });

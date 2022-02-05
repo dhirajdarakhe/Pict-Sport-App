@@ -36,7 +36,8 @@ class _RequestState extends State<Request> {
               itemCount: reqMembers.length,
               itemBuilder: (ctx, index) => reqMembers[index]['isRequested'] == 1
                   ? RequestWidget(
-
+                isAdmin: UserDetails.isAdmin??false,
+                isViewing: false,
                       name: reqMembers[index]['name'],
                       misId: reqMembers[index]['misId'],
                       image: reqMembers[index]['photourl'],
@@ -52,6 +53,8 @@ class _RequestState extends State<Request> {
 }
 
 class RequestWidget extends StatefulWidget {
+  bool isViewing;
+  bool isAdmin;
   late String name;
   late String misId;
   late String image;
@@ -60,13 +63,15 @@ class RequestWidget extends StatefulWidget {
   late Timestamp time;
 
   RequestWidget(
-      {
+      {required this.isAdmin,
+        required this.isViewing,
       required this.name,
       required this.tableNumber,
       required this.image,
       required this.misId,
       required this.time,
-      required this.racketNumber});
+      required this.racketNumber}
+      );
 
   @override
   _RequestWidgetState createState() => _RequestWidgetState();
@@ -243,7 +248,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                 )
               ],
             ),
-            onClick(),
+            widget.isViewing?Container():widget.isAdmin?onClick():Container(),
           ],
         ),
       ),
