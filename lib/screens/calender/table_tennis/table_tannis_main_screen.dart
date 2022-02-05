@@ -98,6 +98,7 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                 child: CircularProgressIndicator(),
               );
             }
+            //getStatus(context);
             final usersnap = userSnapshot.data!.docs;
             racket1=0;racket3=0;racket2=0;
             print('start');
