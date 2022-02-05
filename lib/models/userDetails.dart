@@ -9,11 +9,13 @@ class UserDetails{
     'Badminton': false,//🏸  BT
     'Cricket':false,//🏏  CR
     'FootBall':false,//⚽ FB
-    'Chess':false,//♟️ CH
+    'Chess':false,//♟️CH
     'Gym':false,//💪 GY
   };
   static String? uid;
   static String? photourl;
   static List? mySportsList=[];
   static List? mySportEmoji=[];
+  static bool? isAdmin;
+
 }

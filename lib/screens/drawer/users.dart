@@ -1,8 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+// <<<<<<< new_dhiraj
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/otherUserDetails/userprofilescreen.dart';
+// =======
+// >>>>>>> main
 import 'package:psa/screens/profile/profile_screen.dart';
+
+import '../otherUserProfile.dart';
 
 class AllUsers extends StatefulWidget {
   const AllUsers({Key? key}) : super(key: key);
@@ -29,6 +34,7 @@ class _AllUsersState extends State<AllUsers> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('User').snapshots(),
+
         builder: (ctx, userSnapshot) {
           if (userSnapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -39,6 +45,7 @@ class _AllUsersState extends State<AllUsers> {
           return ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemCount: usersnap.length,
+// <<<<<<< new_dhiraj
               itemBuilder: (ctx, index) => UserWidget(
                   onTap: () {
                     Navigator.push(context,
@@ -54,6 +61,24 @@ class _AllUsersState extends State<AllUsers> {
                   misId: usersnap[index]['misId'],
                   name: usersnap[index]['name'],
                   url: usersnap[index]['photourl']));
+// =======
+              itemBuilder: (ctx, index){
+                final _userTile = usersnap[index];
+                return UserWidget(
+                    onTap: () {
+                      setState(() {
+                        isViewer=_userTile['uid'];
+                      });
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return OtherUserProfile();
+                          }));
+                    },
+                    misId: usersnap[index]['misId'],
+                    name: usersnap[index]['name'],
+                    url: usersnap[index]['photourl']);
+              });
+// >>>>>>> main
         },
       ),
     );

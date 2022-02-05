@@ -1,9 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/calender/table_tennis/table_tannis_main_screen.dart';
-import 'package:psa/screens/chats/chat_members.dart';
 
+//bool requested=false;
 
 class IssueTheRacket extends StatefulWidget {
   const IssueTheRacket({Key? key}) : super(key: key);
@@ -13,84 +18,74 @@ class IssueTheRacket extends StatefulWidget {
 }
 
 class _IssueTheRacketState extends State<IssueTheRacket> {
-  late var isRequestSent = false;
+
+  final _name = UserDetails.name;
   String? choosedTable;
-  String? choosedTime;
   String? choosedRacket;
 
   void _selected_table(String table) => choosedTable = table;
-
-  void _selected_time(String time) => choosedTime = time;
-
   void _selected_Racket(String racket) => choosedRacket = racket;
 
-  // This is the trick to restart the page
-  void _reset() {
-    // Navigator.pushReplacement(
-    //   context,
-    //   PageRouteBuilder(
-    //     transitionDuration: Duration.zero,
-    //     pageBuilder: (_, __, ___) => const IssueTheRacket(),
-    //   ),
-    // );
-    choosedTable = null;
-    choosedTime = null;
-    choosedRacket = null;
-  }
-
-  void _submitForm(BuildContext context) {
-    if (choosedTable == null || choosedTime == null || choosedRacket == null) {
-      Scaffold.of(context).hideCurrentSnackBar();
-
-      Scaffold.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('  Please completely fill the form '),
-          duration: Duration(seconds: 1),
+  DateTime? eventDate = DateTime.now();
+  TimeOfDay time = TimeOfDay.now();
+  final formatYMDHM = DateFormat("yyyy-MM-dd HH:mm");
+  
+  Future Submit(BuildContext context)async{
+    if (choosedTable==null && choosedRacket==null){
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Please enter the Table Number and Number of Racket you want to issue',style: TextStyle(
+          color: Colors.red,
+          fontSize: 15,
         ),
-      );
-    } else if (choosedTable != null &&
-        choosedTime != null &&
-        choosedRacket != null) {
-      setState(() {
-        isRequestSent = !isRequestSent;
+        ),
+      ));
+    } else if (choosedTable==null){
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Please enter the Table Number',style: TextStyle(
+          color: Colors.red,
+          fontSize: 15,
+        ),
+        ),
+      ));
+    } else if (choosedRacket==null){
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Please enter the Number of Racket you want to issue',style: TextStyle(
+          color: Colors.red,
+          fontSize: 15,
+        ),
+        ),
+      ));
+    }else{
+      FirebaseFirestore.instance.collection('EquipmentIssuing')
+      .doc('TT').collection('Equipment')
+      .doc(UserDetails.uid).set({
+        'tableNumber': choosedTable,
+        'racketNumber':choosedRacket,
+        'timeOfIsuue': eventDate,
+        'name': UserDetails.name,
+        'misId':UserDetails.misId,
+        'photourl':UserDetails.photourl,
+        'isRequested':1,
+        'isReturn':false,
       });
-      // print(" choosedTable == $choosedTable ");
-      // print(" choosedTime == $choosedTime ");
-      // print(" choosedRacket == $choosedRacket ");
-    }
-  }
 
-  void _cancleRequest() {
-    /// to cancle the request that just sent
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Accept"),
-          content: const Text("Do you want to cancle the request ?"),
-          actions: [
-            FlatButton(
-                onPressed: () {
-                  setState(() {
-                    isRequestSent = !isRequestSent;
-                    _reset();
-                  });
-                  Navigator.of(context).pushNamed(TabletannisScreen.routeName );
-                },
-                child: const Text("YES")),
-            FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text("No"))
-          ],
-          elevation: 24.0,
-          backgroundColor: const Color(0xff48d683),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(32.0))),
-        );
-      },
-    );
+      setState(() {
+        //requested=true;
+      });
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+        return TabletannisScreen();
+      }));
+    }
+    return;
   }
 
   @override
@@ -98,162 +93,161 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
     return Scaffold(
         backgroundColor: const Color(0xff48d683),
         body: SafeArea(
-          bottom: true,
-          child: Builder(
-            builder: (context) => Padding(
-              padding: const EdgeInsets.only(
-                  top: 1.0, left: 8.0, right: 10.0, bottom: 10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 150.0),
-                      child: Lottie.network(
-                          'https://assets7.lottiefiles.com/packages/lf20_xj6d5ul8.json'),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 150.0),
+                    child: Lottie.network(
+                        'https://assets7.lottiefiles.com/packages/lf20_xj6d5ul8.json'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "  Hi $_name, \n  Let's Issue the racket",
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Expanded(
-                    flex: 1,
-                    child: Text(
-                      "  Hi Dhiraj, \n  Let's Issue the racket",
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                      alignment: Alignment.bottomCenter,
+                      padding: const EdgeInsets.only(bottom: 30, top: 30),
+                      // width: ,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25.0),
+                          topRight: Radius.circular(25.0),
+                          bottomRight: Radius.circular(22.0),
+                          bottomLeft: Radius.circular(22.0),
+                        ),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: SingleChildScrollView(
-                      child: Container(
-                          alignment: Alignment.bottomCenter,
-                          padding: const EdgeInsets.only(bottom: 60, top: 50),
-                          // width: ,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(25.0),
-                              topRight: Radius.circular(25.0),
-                              bottomRight: Radius.circular(22.0),
-                              bottomLeft: Radius.circular(22.0),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
-                              const SizedBox(
-                                height: 20.0,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
-                                children: <Widget>[
-                                  Container(
-                                      child: const Text("Select The Table")),
-                                  // const SizedBox(
-                                  //   width: 20.0,
-                                  // ),
-                                  Container(
-                                    // child: Expanded(
-                                    child: DropDown(
-                                      ItemList: const [
-                                        'Table 1',
-                                        'Table 2',
-                                        'Table 3',
-                                      ],
-                                      item1: 'Table',
-                                      submitFn: _selected_table,
-                                    ),
-                                    // ),
-                                  ),
+                              const Text("Select The Table"),
+                              DropDown(
+                                ItemList: const [
+                                  'Table 1',
+                                  'Table 2',
+                                  'Table 3',
                                 ],
-                              ),
-                              const SizedBox(
-                                height: 20.0,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
-                                children: <Widget>[
-                                  const Text("No. of Racket  "),
-                                  Container(
-                                    child: DropDown(
-                                        ItemList: const ['1', '2', '3', '4'],
-                                        item1: 'Racket',
-                                        submitFn: _selected_Racket),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20.0,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                // crossAxisAlignment: CrossAxisAlignment.,
-                                children: <Widget>[
-                                  Container(
-                                      child: const Text("Select the Time   ")),
-                                  Container(
-                                    child: DropDown(
-                                      ItemList: const [
-                                        '1 hour',
-                                        '2 hour',
-                                        '3 hour'
-                                      ],
-                                      submitFn: _selected_time,
-                                      item1: 'Time',
-                                    ),
-                                  ),
-                                ],
+                                item1: 'Table',
+                                submitFn: _selected_table,
                               ),
                             ],
-                          )),
-                    ),
+                          ),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              const Text("No. of Racket  "),
+                              DropDown(
+                                  ItemList: const ['1', '2', '3', '4'],
+                                  item1: 'Racket',
+                                  submitFn: _selected_Racket),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text('Time Of Issuement', style: TextStyle(fontSize: 15,)),
+                                ),
+                                Center(
+                                  child: DateTimeField(
+                                    initialValue: DateTime.now(),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                    enabled: true,
+                                    enableInteractiveSelection: true,
+                                    decoration: const InputDecoration(
+                                      icon: Icon(Icons.date_range_outlined,color: Colors.blue,size: 35,),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                                        borderSide: BorderSide(color: Colors.black12,width: 2),
+                                      ),
+                                    ),
+                                    format: formatYMDHM,
+                                    onShowPicker: (context, currentValue) async {
+                                      final date = await showDatePicker(
+                                        context: context,
+                                        firstDate: DateTime.now(),
+                                        initialDate: currentValue ?? DateTime.now(),
+                                        lastDate: DateTime(2100),
+                                      );
+                                      if (date != null) {
+                                        final time = await showTimePicker(
+                                          context: context,
+                                          initialTime: TimeOfDay.fromDateTime(
+                                            currentValue ?? DateTime.now(),
+                                          ),
+                                        );
+                                        eventDate =DateTimeField.combine(date, time);
+                                        return DateTimeField.combine(date, time);
+                                      } else {
+                                        eventDate = currentValue;
+                                        return currentValue;
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+                const SizedBox(
+                  height: 9.0,
+                ),
+                Center(
+                  child: RaisedButton(
+                    onPressed: () {
+                      Submit(context);
+                    },
+                    color: Colors.white,
+                    splashColor: Colors.lightBlueAccent,
+                    elevation: 10.0,
+                    shape: const StadiumBorder(),
+                    child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                        child: Text('SEND THE REQUEST')),
                   ),
-                  const SizedBox(
-                    height: 9.0,
+                ),
+                const SizedBox(height: 20),
+                const Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Text(
+                    'Note: Your request has been sent,\nThe Racket will be issued after accepting the request',
+                    style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
-                  Center(
-                    child: Expanded(
-                      flex: 1,
-                      child: RaisedButton(
-                        onPressed: () {
-                          setState(() {
-                            if (!isRequestSent) {
-                              _submitForm(context);
-                            } else {
-                              _cancleRequest();
-                            }
-                          });
-                        },
-                        color: Colors.white,
-                        splashColor: Colors.lightBlueAccent,
-                        elevation: 10.0,
-                        shape: const StadiumBorder(),
-                        child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 20),
-                            child: !isRequestSent
-                                ? const Text('SEND THE REQUEST')
-                                : const Text('CANCLE THE REQUEST')),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Container(
-                    child: isRequestSent
-                        ? const Text(
-                      'Note: Your request has been sent,\n The Racket will be issued after accepting the request',
-                      style: TextStyle(color: Colors.grey),
-                    )
-                        : const Text(""),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           ),
         ));
@@ -269,9 +263,6 @@ class DropDown extends StatefulWidget {
   @override
   State<DropDown> createState() => _DropDownState();
 }
-
-
-
 
 class _DropDownState extends State<DropDown> {
   String? selectedValue = "";
@@ -315,20 +306,18 @@ class _DropDownState extends State<DropDown> {
           ),
         ],
       ),
-      items: widget.ItemList
-          .map((item) => DropdownMenuItem<String>(
-        value: item,
-        child: Text(
-          item,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-          // overflow: TextOverflow.ellipsis,
-        ),
-      ))
-          .toList(),
+      items: widget.ItemList.map((item) => DropdownMenuItem<String>(
+            value: item,
+            child: Text(
+              item,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              // overflow: TextOverflow.ellipsis,
+            ),
+          )).toList(),
       value: selectedValue,
       onChanged: (value) {
         setState(() {

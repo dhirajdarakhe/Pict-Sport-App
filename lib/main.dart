@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
         routes: {
           SportChatScreen.routeName: (ctx)=>SportChatScreen(),
           ChatMembers.routeName: (ctx)=>ChatMembers(),
-          TabletannisScreen.routeName : (ctx) => TabletannisScreen(),
         },
       );
     }else{
@@ -41,7 +40,6 @@ class MyApp extends StatelessWidget {
         routes: {
           SportChatScreen.routeName: (ctx)=>SportChatScreen(),
           ChatMembers.routeName: (ctx)=>ChatMembers(),
-          TabletannisScreen.routeName : (ctx) => TabletannisScreen(),
         },
       );
     }

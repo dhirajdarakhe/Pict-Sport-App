@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/intial_page.dart';
 import 'package:psa/services/UpdateUserInfo.dart';
+import 'package:psa/services/getUserData.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
@@ -115,270 +116,268 @@ class _UserInfoState extends State<UserInfo> {
                       sigmaY: 16,
                       sigmaX: 16,
                     ),
-                    child: Container(
-                      child: Column(
-                        children: [
-                         const Text('Select the Sports ',style: TextStyle(
-                            color: Color(0xFFFF9800),
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),),
-                         const Text('You are Intersected in ',style: TextStyle(
-                            color: Color(0xFFFF9800),
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),),
-                          const SizedBox(height: 20,),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50,right: 50),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                               const Text('BasketBall',style: TextStyle(
-                                  color: Color(0xFFAFB42B),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      if (_basketball==true) {
-                                        _basketball=false;
-                                      } else {
-                                        _basketball=true;
-                                      }
-                                    });
-                                  },
-                                  child: onClick(_basketball),
-                                )
-                              ],
-                            ),
+                    child: Column(
+                      children: [
+                       const Text('Select the Sports ',style: TextStyle(
+                          color: Color(0xFFFF9800),
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),),
+                       const Text('You are Intersected in ',style: TextStyle(
+                          color: Color(0xFFFF9800),
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),),
+                        const SizedBox(height: 20,),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                             const Text('BasketBall',style: TextStyle(
+                                color: Color(0xFFAFB42B),
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    if (_basketball==true) {
+                                      _basketball=false;
+                                    } else {
+                                      _basketball=true;
+                                    }
+                                  });
+                                },
+                                child: onClick(_basketball),
+                              )
+                            ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 50,right: 50,top: 5),
-                            child: Divider(
-                              thickness: 1,
-                            ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          child: Divider(
+                            thickness: 1,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50,right: 50),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text('Table Tennis',style: TextStyle(
-                                  color: Color(0xFFAFB42B),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      if (_tabletennis==true) {
-                                        _tabletennis=false;
-                                      } else {
-                                        _tabletennis=true;
-                                      }
-                                    });
-                                  },
-                                  child: onClick(_tabletennis),
-                                )
-                              ],
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Table Tennis',style: TextStyle(
+                                color: Color(0xFFAFB42B),
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    if (_tabletennis==true) {
+                                      _tabletennis=false;
+                                    } else {
+                                      _tabletennis=true;
+                                    }
+                                  });
+                                },
+                                child: onClick(_tabletennis),
+                              )
+                            ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 50,right: 50,top: 5),
-                            child: Divider(
-                              thickness: 1,
-                            ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          child: Divider(
+                            thickness: 1,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50,right: 50),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text('Cricket',style: TextStyle(
-                                  color: Color(0xFFAFB42B),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      if (_cricket==true) {
-                                        _cricket=false;
-                                      } else {
-                                        _cricket=true;
-                                      }
-                                    });
-                                  },
-                                  child: onClick(_cricket),
-                                )
-                              ],
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Cricket',style: TextStyle(
+                                color: Color(0xFFAFB42B),
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    if (_cricket==true) {
+                                      _cricket=false;
+                                    } else {
+                                      _cricket=true;
+                                    }
+                                  });
+                                },
+                                child: onClick(_cricket),
+                              )
+                            ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 50,right: 50,top: 5),
-                            child: Divider(
-                              thickness: 1,
-                            ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          child: Divider(
+                            thickness: 1,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50,right: 50),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text('Badminton',style: TextStyle(
-                                  color: Color(0xFFAFB42B),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      if (_badminton==true) {
-                                        _badminton=false;
-                                      } else {
-                                        _badminton=true;
-                                      }
-                                    });
-                                  },
-                                  child: onClick(_badminton),
-                                )
-                              ],
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Badminton',style: TextStyle(
+                                color: Color(0xFFAFB42B),
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    if (_badminton==true) {
+                                      _badminton=false;
+                                    } else {
+                                      _badminton=true;
+                                    }
+                                  });
+                                },
+                                child: onClick(_badminton),
+                              )
+                            ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 50,right: 50,top: 5),
-                            child: Divider(
-                              thickness: 1,
-                            ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          child: Divider(
+                            thickness: 1,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50,right: 50),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text('VolleyBall',style: TextStyle(
-                                  color: Color(0xFFAFB42B),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      if (_volleyball==true) {
-                                        _volleyball=false;
-                                      } else {
-                                        _volleyball=true;
-                                      }
-                                    });
-                                  },
-                                  child: onClick(_volleyball),
-                                )
-                              ],
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('VolleyBall',style: TextStyle(
+                                color: Color(0xFFAFB42B),
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    if (_volleyball==true) {
+                                      _volleyball=false;
+                                    } else {
+                                      _volleyball=true;
+                                    }
+                                  });
+                                },
+                                child: onClick(_volleyball),
+                              )
+                            ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 50,right: 50,top: 5),
-                            child: Divider(
-                              thickness: 1,
-                            ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          child: Divider(
+                            thickness: 1,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50,right: 50),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text('Chess',style: TextStyle(
-                                  color: Color(0xFFAFB42B),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      if (_chess==true) {
-                                        _chess=false;
-                                      } else {
-                                        _chess=true;
-                                      }
-                                    });
-                                  },
-                                  child: onClick(_chess),
-                                )
-                              ],
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Chess',style: TextStyle(
+                                color: Color(0xFFAFB42B),
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    if (_chess==true) {
+                                      _chess=false;
+                                    } else {
+                                      _chess=true;
+                                    }
+                                  });
+                                },
+                                child: onClick(_chess),
+                              )
+                            ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 50,right: 50,top: 5),
-                            child: Divider(
-                              thickness: 1,
-                            ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          child: Divider(
+                            thickness: 1,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50,right: 50),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text('Gym',style: TextStyle(
-                                  color: Color(0xFFAFB42B),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      if (_gym==true) {
-                                        _gym=false;
-                                      } else {
-                                        _gym=true;
-                                      }
-                                    });
-                                  },
-                                  child: onClick(_gym),
-                                )
-                              ],
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Gym',style: TextStyle(
+                                color: Color(0xFFAFB42B),
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    if (_gym==true) {
+                                      _gym=false;
+                                    } else {
+                                      _gym=true;
+                                    }
+                                  });
+                                },
+                                child: onClick(_gym),
+                              )
+                            ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 50,right: 50,top: 5),
-                            child: Divider(
-                              thickness: 1,
-                            ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          child: Divider(
+                            thickness: 1,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50,right: 50),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text('Football',style: TextStyle(
-                                  color: Color(0xFFAFB42B),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      if (_football==true) {
-                                        _football=false;
-                                      } else {
-                                        _football=true;
-                                      }
-                                    });
-                                  },
-                                  child: onClick(_football),
-                                )
-                              ],
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Football',style: TextStyle(
+                                color: Color(0xFFAFB42B),
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    if (_football==true) {
+                                      _football=false;
+                                    } else {
+                                      _football=true;
+                                    }
+                                  });
+                                },
+                                child: onClick(_football),
+                              )
+                            ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 50,right: 50,top: 5),
-                            child: Divider(
-                              thickness: 1,
-                            ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          child: Divider(
+                            thickness: 1,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -429,9 +428,10 @@ class _UserInfoState extends State<UserInfo> {
                           'uid':user?.uid,
                           'misId':misId,
                           'SportList': m,
+                          'isAdmin':false,
                         });
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                         return IntialScreen();
+                         return GetUserData();
                         }));
                       }
                     },

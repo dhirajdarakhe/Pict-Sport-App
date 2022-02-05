@@ -20,6 +20,7 @@ class GetUserData extends StatelessWidget {
         future: users.doc(documentId).get(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+
           if (snapshot.hasError) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -34,6 +35,7 @@ class GetUserData extends StatelessWidget {
             UserDetails.misId=data['misId'].toString();
             UserDetails.photourl=data['photourl'].toString();
             UserDetails.uid=data['uid'].toString();
+            UserDetails.isAdmin=data['isAdmin'];
             UserDetails.sportList=Map<String, bool?>.from(data['SportList']).cast<String, bool>();
             CheckMySportList();
             return IntialScreen();
