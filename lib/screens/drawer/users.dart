@@ -61,24 +61,6 @@ class _AllUsersState extends State<AllUsers> {
                   misId: usersnap[index]['misId'],
                   name: usersnap[index]['name'],
                   url: usersnap[index]['photourl']));
-// =======
-              itemBuilder: (ctx, index){
-                final _userTile = usersnap[index];
-                return UserWidget(
-                    onTap: () {
-                      setState(() {
-                        isViewer=_userTile['uid'];
-                      });
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                            return OtherUserProfile();
-                          }));
-                    },
-                    misId: usersnap[index]['misId'],
-                    name: usersnap[index]['name'],
-                    url: usersnap[index]['photourl']);
-              });
-// >>>>>>> main
         },
       ),
     );
