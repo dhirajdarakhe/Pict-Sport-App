@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
+import 'package:psa/screens/otherUserDetails/userprofilescreen.dart';
 import 'package:psa/screens/profile/profile_screen.dart';
 
 class AllUsers extends StatefulWidget {
@@ -36,12 +37,18 @@ class _AllUsersState extends State<AllUsers> {
           }
           final usersnap = userSnapshot.data!.docs;
           return ListView.builder(
-            physics: const BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: usersnap.length,
               itemBuilder: (ctx, index) => UserWidget(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context){
-                      return Profile_Screen();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return OtherUserProfileScreeen(
+                        mis: usersnap[index]['misId'],
+                        email: usersnap[index]['email'],
+                        name: usersnap[index]['name'],
+                        photourl: usersnap[index]['photourl'],
+                      );
                     }));
                   },
                   misId: usersnap[index]['misId'],

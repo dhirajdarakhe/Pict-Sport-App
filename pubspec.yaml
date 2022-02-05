@@ -28,6 +28,9 @@ dependencies:
   direct_select: ^2.0.0
   dropdown_button2: ^1.1.1
   lottie: ^1.2.1
+  circular_profile_avatar: ^2.0.5
+  flutter_speed_dial: ^5.0.0+1
+
 
 
 dev_dependencies:
