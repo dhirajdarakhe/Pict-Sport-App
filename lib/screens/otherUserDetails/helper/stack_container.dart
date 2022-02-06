@@ -40,11 +40,29 @@ StackContainer({required this.imageUrl, required this.name});
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                CircularProfileAvatar(
-                  imageUrl!,
-                  borderWidth: 4.0,
-                  borderColor: Colors.grey,
-                  radius: 70.0,
+                // CircularProfileAvatar(
+                //   imageUrl!,
+                //   borderWidth: 4.0,
+                //   borderColor: Colors.lightBlueAccent,
+                //   radius: 70.0,
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: CircleAvatar(
+                      radius: 70,
+                      backgroundColor: Colors.blue,
+                      child: CircleAvatar(
+                        radius: 68,
+                        backgroundColor: Colors.white,
+                        child: CircleAvatar(
+                          radius: 66,
+                          backgroundImage: NetworkImage(imageUrl!),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 10.0),
                  Text(
@@ -61,10 +79,11 @@ StackContainer({required this.imageUrl, required this.name});
                     color: Colors.black
                   ),
                 ),
+
               ],
             ),
           ),
-          // TopBar(),
+          TopBar(),
         ],
       ),
     );

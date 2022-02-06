@@ -45,7 +45,6 @@ class _AllUsersState extends State<AllUsers> {
           return ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemCount: usersnap.length,
-// <<<<<<< new_dhiraj
               itemBuilder: (ctx, index) => UserWidget(
                   onTap: () {
                     Navigator.push(context,
@@ -86,9 +85,27 @@ class UserWidget extends StatelessWidget {
           width: double.infinity,
           child: Row(
             children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(url.toString()),
-                radius: 25,
+              // CircleAvatar(
+              //   backgroundImage: NetworkImage(url.toString()),
+              //   radius: 25,
+              // ),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: CircleAvatar(
+                    radius: 34,
+                    backgroundColor: Colors.blue,
+                    child: CircleAvatar(
+                      radius: 32,
+                      backgroundColor: Colors.white,
+                      child: CircleAvatar(
+                        radius: 28,
+                        backgroundImage: NetworkImage(url.toString()),
+                      ),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 width: 15,
@@ -113,7 +130,7 @@ class UserWidget extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
