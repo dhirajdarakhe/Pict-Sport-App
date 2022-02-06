@@ -45,7 +45,7 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
             SpeedDialChild(
               onTap: () {
                 setState(() {
-                  _launched = _launchInWebViewOrVC(''/// sending mail is implemented yet
+                  _launched = _launchInWebViewOrVC(''/// sending mail isn't implemented yet
                       'https://www.google.com/search?q=google&oq=google&aqs=chrome.'
                       '.69i57j46i131i199i433i465i512j69i59l2j0i131i433i512l3j0i433i512j0i131i433i512l2.3272j0j'
                       '15&sourceid=chrome&ie=UTF-8');
