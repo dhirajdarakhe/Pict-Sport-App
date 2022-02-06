@@ -31,6 +31,8 @@ dependencies:
 # <<<<<<< new_dhiraj
   circular_profile_avatar: ^2.0.5
   flutter_speed_dial: ^5.0.0+1
+  url_launcher: ^6.0.18
+
 
 
 # =======

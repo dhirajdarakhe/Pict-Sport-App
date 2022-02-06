@@ -15,12 +15,13 @@ class TopBar extends StatelessWidget {
             icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
+              size: 30,
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.menu, color: Colors.white),
-          ),
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: const Icon(Icons.menu, color: Colors.white),
+          // ),
         ],
       ),
     );

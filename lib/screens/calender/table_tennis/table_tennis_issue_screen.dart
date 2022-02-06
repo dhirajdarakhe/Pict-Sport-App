@@ -242,10 +242,10 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                 const SizedBox(height: 20),
                 const Padding(
                   padding: EdgeInsets.all(15.0),
-                  child: Text(
-                    'Note: Your request has been sent,\nThe Racket will be issued after accepting the request',
-                    style: TextStyle(fontSize: 15, color: Colors.white),
-                  ),
+                  // child: Text(
+                  //   // 'Note: Your request has been sent,\nThe Racket will be issued after accepting the request',
+                  //   style: TextStyle(fontSize: 15, color: Colors.white),
+                  // ),
                 )
               ],
             ),

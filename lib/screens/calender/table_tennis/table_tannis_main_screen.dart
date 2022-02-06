@@ -20,10 +20,9 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
   int racket1=0,racket2=0,racket3=0;
 
   Future getStatus(BuildContext context)async{
-    var v=await FirebaseFirestore.instance.collection('EquipmentIssuing')
+    var v =await FirebaseFirestore.instance.collection('EquipmentIssuing')
         .doc('TT').collection('Equipment')
         .doc(UserDetails.uid).get();
-
     if (v.exists){
       _isRequested=v.get('isRequested');
       _table=v.get('tableNumber');
