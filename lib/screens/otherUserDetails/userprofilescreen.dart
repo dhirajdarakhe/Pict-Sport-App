@@ -89,7 +89,6 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                   inputString2: '🏀  BasketBall  '
                       '🏐  VolleyBall  \n\n'
                       '🎾  TableTennis  '
-                      // '🏸  Badminton\n'
                       '🏏  Cricket',
                 ),
                 if (_showData == false)
