@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 import 'package:psa/screens/profile/helper/widget/custom_clipper2.dart';
-// import 'top_bar.dart';
+import '../../profile_edit_srcreen.dart';
 
 class StackContainer2 extends StatelessWidget {
   String? imageUrl;
@@ -40,24 +38,20 @@ class StackContainer2 extends StatelessWidget {
               ),
             ),
           ),
-          // Align(
-          //
-          //   alignment:  const Alignment(1,1),
-          //   child:
           Align(
             alignment:  const Alignment(1,0.3),
-            // top:250,
-            // left: 300,
-            // child: Padding(
-            //   padding: const EdgeInsets.only(left: 10.0),
               child: IconButton(
                   icon: const FaIcon(
                     FontAwesomeIcons.pencilAlt,
                     size: 29,
                     color: Colors.black,
                   ),
-                  onPressed: () {}),
-            // ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return EditProfileScreen();
+                        }));
+                  }),
           ),
           Positioned(
             top: 120,

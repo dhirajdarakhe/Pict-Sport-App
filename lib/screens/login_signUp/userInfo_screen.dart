@@ -84,7 +84,9 @@ class _UserInfoState extends State<UserInfo> {
                             return "MIS ID cannot be too short";
                           }else if (val.length>23){
                             return "MIS ID cannot be that long";
-                          }
+                          }else if(!val.endsWith('@ms.pict.edu')) {
+                              return "Please enter valid MIS ID";
+                            }
                           return null;
                         },
                         //obscureText: true,
