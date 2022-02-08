@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/otherUserDetails/helper/card_item.dart';
-import 'package:psa/screens/otherUserDetails/helper/stack_container.dart';
 import 'package:psa/screens/profile/helper/widget/sport_container.dart';
-
 import 'helper/widget/StackConatiner2.dart';
 
 class Profile_Screen extends StatefulWidget {
@@ -15,24 +12,16 @@ class Profile_Screen extends StatefulWidget {
 }
 
 class _Profile_ScreenState extends State<Profile_Screen> {
+
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: <Widget>[
-              StackContainer2(
-                name: UserDetails.name,
-                imageUrl: UserDetails.photourl,
-                location: 'Aurangabad',
-                dob: '10/11/2002',
-                rollNo: '21106',
-                branch: '',
-                headLine: 'BasketBall Player',
-              ),
+              StackContainer2(),
               Padding(
                 padding:
                 const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
@@ -83,42 +72,62 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                 child: EmailORMisId2(mail: UserDetails.email,
                   misid: UserDetails.misId,),
               ),
-              Padding(
+              UserDetails.achivement == null || UserDetails.achivement=='null'?Container(): Padding(
                 child: sportContainer(fondSize: 14,
                     headline: "Achievement in sport",
-                    Discription:
-                        "he greatest achievement in my life would have to be my success in the sport of football. "
-                        " I started playing the game at the age of eight.  It stuck with me throughout my life until now. "),
+                    Discription: UserDetails.achivement),
                 padding:
                     const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
-                child: sportContainer(fondSize: 14,
-                  headline: "Skill in sport",
-                  Discription: 'Time Management\n'
-                      'LeaderShip\n'
-                      'Communication',
-                ),
               ),
               Padding(
                 padding:
                 const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
-                child: sportContainer(fondSize: 23,
-                  headline: "Interested sport",
-                  Discription: '🏀  '
-                '🏐  '
-                '🎾  '
-                '🏏  '
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Sports Intersected',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10,),
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(0, 2),
+                            blurRadius: 3,
+                          ),
+                        ],
+                      ),
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: UserDetails.mySportEmoji?.length,
+                          itemBuilder: (ctx,index)=> Container(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10,top: 15),
+                              child: Text(
+                                UserDetails.mySportEmoji![index],
+                                style: const TextStyle(
+                                  fontSize: 30,
+                                ),
+                              ),
+                            ),
+                          )),
+                    ),
+                  ],
                 ),
               ),
-              Padding(
+              UserDetails.aboutMe==null || UserDetails.aboutMe=='null'?Container(): Padding(
                 padding:
                 const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
                 child: sportContainer(
                     headline: "About myself ",
-                    Discription: 'This is dhiraj , I\'m interested in playing cricket , football , table tennis', fondSize: 14,
+                    Discription: UserDetails.aboutMe, fondSize: 14,
                 ),
               ),
             ],

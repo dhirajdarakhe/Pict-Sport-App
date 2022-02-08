@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 
 class sportContainer extends StatefulWidget {
-  // const sportContainer({Key? key}) : super(key: key);
-  sportContainer({required this.Discription, required this.headline,required this.fondSize});
+
+  sportContainer({required this.Discription,
+    required this.headline,
+    required this.fondSize});
   String? headline;
   String? Discription;
   double fondSize;
@@ -21,9 +23,9 @@ class _sportContainerState extends State<sportContainer> {
         Text(
           '''
 ${widget.headline} ''',
-          style: const TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold
+          ),
         ),
-
         const SizedBox(height: 10),
         Container(
           decoration: BoxDecoration(
@@ -33,7 +35,6 @@ ${widget.headline} ''',
               BoxShadow(
                 offset: Offset(0, 2),
                 blurRadius: 3,
-                // color: kShadowColor,
               ),
             ],
           ),
@@ -65,3 +66,4 @@ ${widget.headline} ''',
     );
   }
 }
+
