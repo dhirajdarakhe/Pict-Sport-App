@@ -6,7 +6,17 @@ import '../../profile_edit_srcreen.dart';
 class StackContainer2 extends StatelessWidget {
   String? imageUrl;
   String? name;
-  StackContainer2({required this.imageUrl, required this.name});
+  String? branch;
+  String? dob;
+  String? rollNo;
+  String? headLine;
+  String? location;
+
+  StackContainer2({
+    this.rollNo,this.headLine,
+    this.dob,this.branch,this.location
+    ,this.imageUrl,this.name
+});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,38 +89,71 @@ class StackContainer2 extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10.0),
-                const Padding(
-                  padding: EdgeInsets.only(left: 8.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    // "mr. ${name}",
-                    'Dhiraj Darakhe',
-                    style: TextStyle(
+                    name!,
+                    style: const TextStyle(
                       fontSize: 18.0,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 8.0, top: 2),
-                  child: Text(
-                    "Flutter Player\n"
-                        "21118",
-                    style: TextStyle(fontSize: 14.0, color: Colors.black),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 2),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                     headLine==''?Container(): Text(
+                        headLine??'',
+                        style: const TextStyle(fontSize: 14.0, color: Colors.black),
+                      ),
+                      rollNo==''?Container(): Text(
+                            rollNo??'',
+                        style: const TextStyle(fontSize: 14.0, color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 8.0, top: 11),
-                  child: Text(
-                    "Pune Institute of Computer Technology, Pune.\n"
-                    "Computer Branch,\n"
-                        "(DOB-21/05/2003)\n"
-                    "Buldhana, maharashara.",
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.grey,
-                      fontStyle: FontStyle.italic,
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 11),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Pune Institute of Computer Technology, Pune.",
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      branch==''?Container(): Text(
+                        branch??'',
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      dob==''?Container(): Text(
+                        dob??'',
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      location==''?Container(): Text(
+                        location??'',
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
