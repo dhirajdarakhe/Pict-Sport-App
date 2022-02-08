@@ -18,4 +18,15 @@ class UserDetails{
   static List? mySportEmoji=[];
   static bool? isAdmin;
 
+  static String? birthday;
+  static String? location;
+  static String? headline;
+  static String? rollNo;
+  static String? achivement;
+  static String? aboutMe;
+  static String? instaUrl;
+  static String? twitterUrl;
+  static String? linkedInUrl;
+  static String? whatAppNo;
+  static String? branch;//local
 }

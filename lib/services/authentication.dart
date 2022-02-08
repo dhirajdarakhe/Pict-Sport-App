@@ -31,7 +31,6 @@ class Authentication
     print('starting');
     late final isuser;
     try {
-      // ignore: unused_local_variable
       UserCredential userCredential;
       if (kIsWeb) {
         var googleProvider = GoogleAuthProvider();

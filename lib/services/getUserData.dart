@@ -38,6 +38,18 @@ class GetUserData extends StatelessWidget {
             UserDetails.isAdmin=data['isAdmin'];
             UserDetails.sportList=Map<String, bool?>.from(data['SportList']).cast<String, bool>();
             CheckMySportList();
+            UserDetails.location=data['location'].toString();
+            UserDetails.headline=data['headLine'].toString();
+            UserDetails.rollNo=data['rollNo'].toString();
+            UserDetails.achivement=data['achievement'].toString();
+            UserDetails.aboutMe=data['aboutMe'].toString();
+            UserDetails.instaUrl=data['insta'].toString();
+            UserDetails.twitterUrl=data['twitter'].toString();
+            UserDetails.linkedInUrl=data['linkedIn'].toString();
+            UserDetails.whatAppNo=data['whatAppNo'].toString();
+            UserDetails.birthday=data['dob'].toString();
+            print('Achivement');
+            print(UserDetails.achivement);
             return IntialScreen();
           }
           return const Center(child: CircularProgressIndicator(),);

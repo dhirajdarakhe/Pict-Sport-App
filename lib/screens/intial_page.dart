@@ -34,12 +34,11 @@ class _IntialScreenState extends State<IntialScreen> {
         pageChanged(index);
       },
       children: const <Widget>[
-        // Profile_Screen(),
+        Profile_Screen(),
         Announcement_Screen(),
         ChatScreen(),
         HomeScreen(),
         CalendarScreen(),
-        Profile_Screen(),
       ],
     );
   }

@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/profile/helper/widget/custom_clipper2.dart';
 import '../../profile_edit_srcreen.dart';
 
 class StackContainer2 extends StatelessWidget {
-  String? imageUrl;
-  String? name;
-  String? branch;
-  String? dob;
-  String? rollNo;
-  String? headLine;
-  String? location;
 
-  StackContainer2({
-    this.rollNo,this.headLine,
-    this.dob,this.branch,this.location
-    ,this.imageUrl,this.name
-});
+  StackContainer2();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,16 +21,14 @@ class StackContainer2 extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(color: Colors.black, width: 5),
-                // decoration:   BoxDecoration(
                 boxShadow: [
                   BoxShadow(
                     color: Colors.blue.withOpacity(0.5),
                     spreadRadius: 5,
                     blurRadius: 7,
-                    offset: const Offset(6, 3), // changes position of shadow
+                    offset: const Offset(6, 3),
                   ),
                 ],
-                //BoxShadow
                 image: const DecorationImage(
                   image: NetworkImage(
                       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9DcR1UKPNaaRtjfAEojtO_lbwggqEPUfgow&usqp=CAU"),
@@ -82,7 +71,7 @@ class StackContainer2 extends StatelessWidget {
                         backgroundColor: Colors.white,
                         child: CircleAvatar(
                           radius: 60,
-                          backgroundImage: NetworkImage(imageUrl!),
+                          backgroundImage: NetworkImage(UserDetails.photourl.toString()),
                         ),
                       ),
                     ),
@@ -92,7 +81,7 @@ class StackContainer2 extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    name!,
+                    UserDetails.name.toString(),
                     style: const TextStyle(
                       fontSize: 18.0,
                       color: Colors.black,
@@ -105,12 +94,12 @@ class StackContainer2 extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     headLine==''?Container(): Text(
-                        headLine??'',
+                     UserDetails.headline==null || UserDetails.headline=='null'?Container(): Text(
+                        UserDetails.headline.toString(),
                         style: const TextStyle(fontSize: 14.0, color: Colors.black),
                       ),
-                      rollNo==''?Container(): Text(
-                            rollNo??'',
+                      UserDetails.rollNo==null || UserDetails.rollNo=='null'?Container(): Text(
+                            UserDetails.rollNo.toString(),
                         style: const TextStyle(fontSize: 14.0, color: Colors.black),
                       ),
                     ],
@@ -129,24 +118,24 @@ class StackContainer2 extends StatelessWidget {
                           fontStyle: FontStyle.italic,
                         ),
                       ),
-                      branch==''?Container(): Text(
-                        branch??'',
+                      UserDetails.rollNo==null || UserDetails.rollNo=='null'?Container(): const Text(
+                        'Computer',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      UserDetails.birthday=='null' || UserDetails.birthday==null?Container(): Text(
+                        UserDetails.birthday.toString(),
                         style: const TextStyle(
                           fontSize: 14.0,
                           color: Colors.grey,
                           fontStyle: FontStyle.italic,
                         ),
                       ),
-                      dob==''?Container(): Text(
-                        dob??'',
-                        style: const TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.grey,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                      location==''?Container(): Text(
-                        location??'',
+                      UserDetails.location==null || UserDetails.location=='null'?Container(): Text(
+                        UserDetails.location.toString(),
                         style: const TextStyle(
                           fontSize: 14.0,
                           color: Colors.grey,
@@ -159,8 +148,6 @@ class StackContainer2 extends StatelessWidget {
               ],
             ),
           ),
-          // ),
-          // TopBar(),
         ],
       ),
     );
