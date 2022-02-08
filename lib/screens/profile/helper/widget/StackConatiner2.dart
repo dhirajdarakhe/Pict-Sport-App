@@ -10,14 +10,25 @@ class StackContainer2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height=MediaQuery.of(context).size.height;
     return Container(
-      height: 430.0,
+      height: (UserDetails.headline==null || UserDetails.headline=='null')
+          && (UserDetails.rollNo==null || UserDetails.rollNo=='null')
+          && (UserDetails.birthday==null || UserDetails.birthday=='null')
+          && (UserDetails.location==null || UserDetails.location=='null')?
+      height*0.42:
+      (UserDetails.headline==null || UserDetails.headline=='null')
+          || (UserDetails.rollNo==null || UserDetails.rollNo=='null')
+          || (UserDetails.birthday==null || UserDetails.birthday=='null')
+          || (UserDetails.location==null || UserDetails.location=='null')
+          ?height*0.47:
+      height*0.52,
       child: Stack(
         children: <Widget>[
           ClipPath(
             clipper: MyCustomClipper2(),
             child: Container(
-              height: 300.0,
+              height: height*0.37,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(color: Colors.black, width: 5),
@@ -38,7 +49,7 @@ class StackContainer2 extends StatelessWidget {
             ),
           ),
           Align(
-            alignment:  const Alignment(1,0.3),
+            alignment:  const Alignment(1,0.5),
               child: IconButton(
                   icon: const FaIcon(
                     FontAwesomeIcons.pencilAlt,

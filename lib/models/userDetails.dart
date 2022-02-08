@@ -17,7 +17,6 @@ class UserDetails{
   static List? mySportsList=[];
   static List? mySportEmoji=[];
   static bool? isAdmin;
-
   static String? birthday;
   static String? location;
   static String? headline;
@@ -28,5 +27,4 @@ class UserDetails{
   static String? twitterUrl;
   static String? linkedInUrl;
   static String? whatAppNo;
-  static String? branch;//local
 }
