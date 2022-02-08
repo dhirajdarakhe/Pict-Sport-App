@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/otherUserDetails/helper/card_item.dart';
 import 'package:psa/screens/otherUserDetails/helper/stack_container.dart';
 import 'package:psa/screens/profile/helper/widget/sport_container.dart';
@@ -24,9 +25,13 @@ class _Profile_ScreenState extends State<Profile_Screen> {
           child: Column(
             children: <Widget>[
               StackContainer2(
-                imageUrl:
-                    'https://lh3.googleusercontent.com/a-/AOh14GiI2oRbxg9hBNUSaJE4WVIJMJpRrGHAubWB-BpTzw=s96-c',
-                name: 'widget.name',
+                name: UserDetails.name,
+                imageUrl: UserDetails.photourl,
+                location: 'Aurangabad',
+                dob: '10/11/2002',
+                rollNo: '21106',
+                branch: '',
+                headLine: 'BasketBall Player',
               ),
               Padding(
                 padding:
@@ -75,13 +80,14 @@ class _Profile_ScreenState extends State<Profile_Screen> {
               Padding(
                 padding:
                 const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
-                child: EmailORMisId2(mail: 'dhirajdarakhe@gamil.com',misid: "c2k220106749@pict.edu",),
+                child: EmailORMisId2(mail: UserDetails.email,
+                  misid: UserDetails.misId,),
               ),
               Padding(
                 child: sportContainer(fondSize: 14,
                     headline: "Achievement in sport",
                     Discription:
-                        "The greatest achievement in my life would have to be my success in the sport of football. "
+                        "he greatest achievement in my life would have to be my success in the sport of football. "
                         " I started playing the game at the age of eight.  It stuck with me throughout my life until now. "),
                 padding:
                     const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),

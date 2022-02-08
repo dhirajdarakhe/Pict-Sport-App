@@ -72,7 +72,7 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
       _isRequested=v.get('isRequested');
       _table=v.get('tableNumber');
       _noOfRacket=v.get('racketNumber');
-      if (_isRequested==3){
+      if (_isRequested==3 || _isRequested==5){
         setState(() {
           _isFirstVisit=true;
         });
@@ -95,6 +95,7 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
     getStatus(context);
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -136,6 +137,7 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
               }
               final usersnap = userSnapshot.data!.docs;
               racket1=0;racket3=0;racket2=0;
+
               print('start');
               for(int i=0;i<usersnap.length;i++){
                 if (usersnap[i]['tableNumber']=='Table 1'){
@@ -206,7 +208,7 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                             'Issue the Racked',
                             style: TextStyle(fontSize: 16),
                           ):_isRequested==1? const Text(
-                            'Requested',
+                            'Cancel Request',
                             style: TextStyle(fontSize: 16),
                           ):_isRequested==2? const Text(
                             'Return the Racket',
@@ -294,6 +296,7 @@ class TTWidget extends StatelessWidget {
                     bottomLeft: Radius.circular(20)),
                // border: Border.all(color: Colors.grey,width: 5),
               ),
+              child: Text(enrolledSeats.toString()),
             )
           ],
         ),

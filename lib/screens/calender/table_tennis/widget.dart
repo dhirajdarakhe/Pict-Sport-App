@@ -258,9 +258,29 @@ class _RequestWidgetState extends State<RequestWidget> {
                                       horizontal: 10, vertical: 10),
                                   child: Text('Accept')),
                             ),
-                            /*RaisedButton(
+                            RaisedButton(
                               onPressed: () {
                                 // Submit(context);
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return PopUpRequest(
+                                        onTap: () async {
+                                          await FirebaseFirestore.instance
+                                              .collection('TTEquipment')
+                                              .doc(UserDetails.uid)
+                                              .update({
+                                            'isRequested': 5,
+                                          });
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                              content: Text(
+                                                'Request rejected',
+                                              )));
+                                          Navigator.pop(context);
+                                        },
+                                        text: 'Want to Reject the Request?',
+                                      ); //---------
+                                    });
                               },
                               color: Color(0xfff76463),
                               splashColor: Colors.lightBlueAccent,
@@ -270,7 +290,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 10),
                                   child: Text('Reject')),
-                            ),*/
+                            ),
                           ],
                         ),
                       ),
