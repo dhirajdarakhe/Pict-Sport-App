@@ -118,14 +118,31 @@ class StackContainer2 extends StatelessWidget {
                           fontStyle: FontStyle.italic,
                         ),
                       ),
-                      UserDetails.rollNo==null || UserDetails.rollNo=='null'?Container(): const Text(
+                      UserDetails.misId![0].toString()=='C'
+                          ||  UserDetails.misId![0].toString()=='c'? const Text(
                         'Computer',
                         style: TextStyle(
                           fontSize: 14.0,
                           color: Colors.grey,
                           fontStyle: FontStyle.italic,
                         ),
-                      ),
+                      ):UserDetails.misId![0]=='I'
+                          || UserDetails.misId![0]=='i'? const Text(
+                        'Information Technology',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ):UserDetails.misId![0]=='E'
+                          || UserDetails.misId![0]=='e'?const Text(
+                        'Electronics',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ):Container(),
                       UserDetails.birthday=='null' || UserDetails.birthday==null?Container(): Text(
                         UserDetails.birthday.toString(),
                         style: const TextStyle(
