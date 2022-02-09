@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:psa/models/userDetails.dart';
+import 'package:psa/screens/profile/profile_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -54,7 +55,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           'whatAppNo':mobile,
           'dob':dob,
         });
-        Navigator.pop(context);
+        UserDetails.headline=headline;
+        UserDetails.rollNo=rollNo;
+        UserDetails.location=location;
+        UserDetails.achivement=achivement;
+        UserDetails.aboutMe=aboutUrSelf;
+        UserDetails.instaUrl=insta;
+        UserDetails.linkedInUrl=link;
+        UserDetails.twitterUrl=twit;
+        UserDetails.whatAppNo=mobile;
+        UserDetails.birthday=dob;
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+              return Profile_Screen();
+            }));
+        //------
       } else {
         print("null is being printed <=");
       }
@@ -81,8 +96,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         backgroundColor: Colors.white,
         leading: TextButton(
           onPressed: () {
-            // setState(() =>
-            Navigator.pop(context);
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) {
+                  return Profile_Screen();
+                }));
             // );
           },
           child: const Padding(

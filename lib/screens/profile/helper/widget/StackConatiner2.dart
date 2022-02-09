@@ -57,7 +57,7 @@ class StackContainer2 extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onPressed: () {
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) {
                           return EditProfileScreen();
                         }));
