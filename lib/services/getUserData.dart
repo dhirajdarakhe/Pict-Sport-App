@@ -48,8 +48,6 @@ class GetUserData extends StatelessWidget {
             UserDetails.linkedInUrl=data['linkedIn'].toString();
             UserDetails.whatAppNo=data['whatAppNo'].toString();
             UserDetails.birthday=data['dob'].toString();
-            print('Achivement');
-            print(UserDetails.achivement);
             return IntialScreen();
           }
           return const Center(child: CircularProgressIndicator(),);

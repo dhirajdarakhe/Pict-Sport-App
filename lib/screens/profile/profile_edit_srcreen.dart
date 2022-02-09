@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/profile/profile_screen.dart';
 
@@ -14,7 +13,7 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
- // final formatYMDHM = DateFormat("yyyy-MM-dd");
+
   static String hiddenHeadLine="Ex: BasketBall Player";
   static String hiddenRollNo="00000";
   static String hiddenLocation="Ex:Aurangabad,Maharashtra";
@@ -28,8 +27,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     try {
       if (formkey.currentState!.validate()) {
         formkey.currentState!.save();
-        if(datetime != DateTime.now()) {
-          print(datetime); }
 
         if (headline==hiddenHeadLine){headline=null;}
         if (rollNo==hiddenRollNo){rollNo=null;}
@@ -42,8 +39,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         if (mobile==hiddenInsta){mobile=null;}
 
         FirebaseFirestore.instance
-        .collection('User').doc(UserDetails.uid)
-        .update({
+            .collection('User').doc(UserDetails.uid)
+            .update({
           'headLine':headline,
           'rollNo':rollNo,
           'location':location,
@@ -55,21 +52,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           'whatAppNo':mobile,
           'dob':dob,
         });
-        UserDetails.headline=headline;
-        UserDetails.rollNo=rollNo;
-        UserDetails.location=location;
-        UserDetails.achivement=achivement;
-        UserDetails.aboutMe=aboutUrSelf;
-        UserDetails.instaUrl=insta;
-        UserDetails.linkedInUrl=link;
-        UserDetails.twitterUrl=twit;
-        UserDetails.whatAppNo=mobile;
-        UserDetails.birthday=dob;
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) {
-              return Profile_Screen();
-            }));
-        //------
+        setState(() {
+          UserDetails.headline=headline;
+          UserDetails.rollNo=rollNo;
+          UserDetails.location=location;
+          UserDetails.achivement=achivement;
+          UserDetails.aboutMe=aboutUrSelf;
+          UserDetails.instaUrl=insta;
+          UserDetails.linkedInUrl=link;
+          UserDetails.twitterUrl=twit;
+          UserDetails.whatAppNo=mobile;
+          UserDetails.birthday=dob;
+        });
+        Navigator.pop(context);
+
+
       } else {
         print("null is being printed <=");
       }
@@ -96,10 +93,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         backgroundColor: Colors.white,
         leading: TextButton(
           onPressed: () {
-            Navigator.pushReplacement(context,
+            Navigator.pop(context);
+           /* Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) {
                   return Profile_Screen();
-                }));
+                }));*/
             // );
           },
           child: const Padding(
@@ -191,8 +189,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     headline = input;
                   },
                   validator: (input) => input!.length > 4 && input.isNotEmpty
-                        ? null
-                        : "Should be at least 4 char ",
+                      ? null
+                      : "Should be at least 4 char ",
 
                 ),
                 TextFormField(
@@ -214,7 +212,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       "Birthdate:  ",
                       style: TextStyle(
                         fontSize: 17,
-                       // fontWeight: FontWeight.w400,
+                        // fontWeight: FontWeight.w400,
                       ),
                     ),
                     Text(
@@ -237,14 +235,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             .then((value) {
                           setState(() {
                             print('start');
-                           _day=value?.day;
-                           print(_day);
-                           _month=value?.month;
-                           print(_month);
-                           _year=value?.year;
-                           print(_year);
-                           dob=(_day.toString()+'/'+_month.toString()+'/'+_year.toString());
-                           UserDetails.birthday=dob;
+                            _day=value?.day;
+                            print(_day);
+                            _month=value?.month;
+                            print(_month);
+                            _year=value?.year;
+                            print(_year);
+                            dob=(_day.toString()+'/'+_month.toString()+'/'+_year.toString());
+                            UserDetails.birthday=dob;
                           });
                         });
                         print(dob);
@@ -288,14 +286,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: TextFormField(
                         initialValue: UserDetails.achivement=='null' || UserDetails.achivement==null?hiddenAchivement:UserDetails.achivement,
                         decoration:
-                            const InputDecoration(labelText: "Achivement"),
+                        const InputDecoration(labelText: "Achivement"),
                         onSaved: (input) {
                           achivement = input;
                         },
                         validator: (input) =>
-                          input!.length > 10 && input.isNotEmpty
-                              ? null
-                              : "Should be at least 10 char ",
+                        input!.length > 10 && input.isNotEmpty
+                            ? null
+                            : "Should be at least 10 char ",
                       ),
                     ),
                   ],
@@ -305,7 +303,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   maxLines: 2,
                   keyboardType: TextInputType.multiline,
                   decoration:
-                      const InputDecoration(labelText: "About Your self"),
+                  const InputDecoration(labelText: "About Your self"),
                   onSaved: (input) {
                     aboutUrSelf = input;
                   },
@@ -341,7 +339,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               insta = input;
                             },
                             validator: (input) => input!.startsWith(
-                                        "https://www.instagram.com/in/") || input.isEmpty
+                                "https://www.instagram.com/in/") || input.isEmpty
                                 ? null
                                 : "Enter valid URL",
                           ),
@@ -390,8 +388,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               link = input;
                             },
                             validator: (input) => input!.startsWith(
-                                        "https://www.linkedin.com/in/") ||
-                                    input.isEmpty
+                                "https://www.linkedin.com/in/") ||
+                                input.isEmpty
                                 ? null
                                 : "Enter valid URL",
                           ),
@@ -420,9 +418,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               mobile = input;
                             },
                             validator: (input) =>
-                                input!.length == 10 || input.isEmpty
-                                    ? null
-                                    : "Enter valid mobile number",
+                            input!.length == 10 || input.isEmpty
+                                ? null
+                                : "Enter valid mobile number",
                           ),
                         ),
                       ],
