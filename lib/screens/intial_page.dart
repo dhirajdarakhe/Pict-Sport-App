@@ -100,19 +100,7 @@ class _IntialScreenState extends State<IntialScreen> {
           pageController.animateToPage(index,
               duration: const Duration(milliseconds: 500), curve: Curves.ease);
         }),
-// <<<<<<< dhiraj_
-        items:  const [
-          BottomNavigationBarItem(icon: Icon(Icons.notifications,), label: 'Notification'),
-          // BottomNavigationBarItem(icon: Icon(Icons.leaderboard),label: 'leaderboard'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today_outlined), label: 'Calendar'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),label: 'Profile',
 
-          )
-// =======
         items: [
           const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           const BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
@@ -125,7 +113,6 @@ class _IntialScreenState extends State<IntialScreen> {
               radius: 11,
             ),
           ), label: 'Profile')
-// >>>>>>> main
         ],
       ),
       body: Builder(

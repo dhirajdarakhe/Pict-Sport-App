@@ -38,9 +38,6 @@ class GetUserData extends StatelessWidget {
             UserDetails.isAdmin=data['isAdmin'];
             UserDetails.sportList=Map<String, bool?>.from(data['SportList']).cast<String, bool>();
             CheckMySportList();
-// <<<<<<< dhiraj_
-            return const IntialScreen();
-// =======
             UserDetails.location=data['location'].toString();
             UserDetails.headline=data['headLine'].toString();
             UserDetails.rollNo=data['rollNo'].toString();
@@ -51,10 +48,7 @@ class GetUserData extends StatelessWidget {
             UserDetails.linkedInUrl=data['linkedIn'].toString();
             UserDetails.whatAppNo=data['whatAppNo'].toString();
             UserDetails.birthday=data['dob'].toString();
-            print('Achivement');
-            print(UserDetails.achivement);
             return IntialScreen();
-// >>>>>>> main
           }
           return const Center(child: CircularProgressIndicator(),);
         });
