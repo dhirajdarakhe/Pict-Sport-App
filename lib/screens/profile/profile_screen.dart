@@ -79,7 +79,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                     headline: "Achievement in sport",
                     Discription: UserDetails.achivement),
                 padding:
-                    const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
+                const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
               ),
               Padding(
                 padding:
@@ -106,7 +106,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                         ],
                       ),
                       child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemCount: UserDetails.mySportEmoji?.length,
                           itemBuilder: (ctx,index)=> Container(
@@ -128,8 +128,8 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                 padding:
                 const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
                 child: sportContainer(
-                    headline: "About myself ",
-                    Discription: UserDetails.aboutMe, fondSize: 17,
+                  headline: "About myself ",
+                  Discription: UserDetails.aboutMe, fondSize: 17,
                 ),
               ),
             ],
