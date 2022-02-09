@@ -10,6 +10,7 @@ import 'drawer/drawer.dart';
 class IntialScreen extends StatefulWidget {
   const IntialScreen({Key? key}) : super(key: key);
 
+
   @override
   _IntialScreenState createState() => _IntialScreenState();
 }
@@ -67,7 +68,7 @@ class _IntialScreenState extends State<IntialScreen> {
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: defaultBackgrdColor,
-      drawer: const Drawer(
+      drawer:  const Drawer(
         child: App_Drawer(),
       ),
       /*appBar: AppBar(
@@ -99,7 +100,7 @@ class _IntialScreenState extends State<IntialScreen> {
           pageController.animateToPage(index,
               duration: const Duration(milliseconds: 500), curve: Curves.ease);
         }),
-        items: const [
+        items:  const [
           BottomNavigationBarItem(icon: Icon(Icons.notifications,), label: 'Notification'),
           // BottomNavigationBarItem(icon: Icon(Icons.leaderboard),label: 'leaderboard'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
@@ -107,7 +108,9 @@ class _IntialScreenState extends State<IntialScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.calendar_today_outlined), label: 'Calendar'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle), label: 'Profile')
+              icon: Icon(Icons.account_circle),label: 'Profile',
+
+          )
         ],
       ),
       body: Builder(

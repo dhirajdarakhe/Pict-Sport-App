@@ -38,7 +38,7 @@ class GetUserData extends StatelessWidget {
             UserDetails.isAdmin=data['isAdmin'];
             UserDetails.sportList=Map<String, bool?>.from(data['SportList']).cast<String, bool>();
             CheckMySportList();
-            return IntialScreen();
+            return const IntialScreen();
           }
           return const Center(child: CircularProgressIndicator(),);
         });

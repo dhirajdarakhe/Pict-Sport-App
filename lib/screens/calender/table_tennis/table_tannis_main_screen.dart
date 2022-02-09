@@ -83,7 +83,8 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                 return ReturnScreen();
               }));
             },
-                icon: const Icon(Icons.read_more_outlined,size: 30,)),
+                // icon: const Icon(Icons.read_more_outlined,size: 30,)),
+                icon: const Icon(Icons.compare_arrows,size: 30,)),
           ],
         ),
         body: StreamBuilder<QuerySnapshot>(

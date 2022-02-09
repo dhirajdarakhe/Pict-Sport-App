@@ -14,8 +14,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     try {
       if (formkey.currentState!.validate()) {
         formkey.currentState!.save();
-      if(datetime != DateTime.now()) {
-        print(datetime); }
+      if(datetime != DateTime.now()) { print(datetime); }
         print(location);
         print(link);
         print(twit);
@@ -162,7 +161,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   onSaved: (input) {
                     rollNo = input;
                   },
-                  validator: (input) => input!.length == 5 || input.length == 0 
+                  validator: (input) => input!.length == 5 || input.length == 0
                       ? null
                       : "Should be 5 char ",
                 ),
@@ -203,7 +202,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ),
                 ),
-                // ),
+
+
+
+
+
                 TextFormField(
                   decoration: const InputDecoration(labelText: "Location"),
                   onSaved: (input) {
