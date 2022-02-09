@@ -27,6 +27,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     try {
       if (formkey.currentState!.validate()) {
         formkey.currentState!.save();
+// <<<<<<< dhiraj_
+      if(datetime != DateTime.now()) { print(datetime); }
+        print(location);
+        print(link);
+        print(twit);
+        print(headline);
+        print(mobile);
+        print(rollNo);
+        print(achivement);
+        print(mobile);
+// =======
         if(datetime != DateTime.now()) {
           print(datetime); }
 
@@ -54,6 +65,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           'whatAppNo':mobile,
           'dob':dob,
         });
+// >>>>>>> main
         Navigator.pop(context);
       } else {
         print("null is being printed <=");
@@ -185,7 +197,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   onSaved: (input) {
                     rollNo = input;
                   },
+// <<<<<<< dhiraj_
+//                   validator: (input) => input!.length == 5 || input.length == 0
+// =======
                   validator: (input) => input!.length == 5 && input.isNotEmpty
+// >>>>>>> main
                       ? null
                       : "Should be 5 char ",
                 ),
@@ -249,6 +265,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ],
                 ),
+// <<<<<<< dhiraj_
+
+
+
+
+
+// =======
+// >>>>>>> main
                 TextFormField(
                   initialValue: UserDetails.location=='null' || UserDetails.location==null?hiddenLocation:UserDetails.location,
                   decoration: const InputDecoration(labelText: "Location"),
