@@ -42,22 +42,14 @@ ${widget.headline} ''',
             padding: const EdgeInsets.all(19.0),
             child: Container(
               width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  // Text("FootBall",style: TextStyle(fontSize: 16, fontFamily: "Poppins"),),
-                  const SizedBox(
-                    height: 9,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 18.0),
-                    child: Text(
-                      '${widget.Discription}',
-                      style:
-                           TextStyle(fontSize: widget.fondSize, fontFamily: "Poppins"),
-                    ),
-                  )
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  '${widget.Discription}',
+                  style:
+                       TextStyle(fontSize: widget.fondSize,
+                           fontFamily: "Poppins"),
+                ),
               ),
             ),
           ),

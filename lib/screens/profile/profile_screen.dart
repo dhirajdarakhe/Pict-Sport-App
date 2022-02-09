@@ -35,7 +35,8 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                             FontAwesomeIcons.instagram,
                             size: 35,
                           ),
-                          onPressed: () {}),
+                          onPressed: () {
+                          }),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0),
@@ -74,7 +75,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                   misid: UserDetails.misId,),
               ),
               UserDetails.achivement == null || UserDetails.achivement=='null'?Container(): Padding(
-                child: sportContainer(fondSize: 14,
+                child: sportContainer(fondSize: 17,
                     headline: "Achievement in sport",
                     Discription: UserDetails.achivement),
                 padding:
@@ -128,7 +129,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                 const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
                 child: sportContainer(
                     headline: "About myself ",
-                    Discription: UserDetails.aboutMe, fondSize: 14,
+                    Discription: UserDetails.aboutMe, fondSize: 17,
                 ),
               ),
             ],

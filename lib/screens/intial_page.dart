@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/home_screen.dart';
 import 'package:psa/screens/announcements/announcement_screen.dart';
 import 'package:psa/screens/chats/chat_screen.dart';
@@ -34,9 +35,9 @@ class _IntialScreenState extends State<IntialScreen> {
         pageChanged(index);
       },
       children: const <Widget>[
-        Announcement_Screen(),
-        ChatScreen(),
         HomeScreen(),
+        ChatScreen(),
+        Announcement_Screen(),
         CalendarScreen(),
         Profile_Screen(),
       ],
@@ -44,16 +45,16 @@ class _IntialScreenState extends State<IntialScreen> {
   }
 
   ShapeBorder? bottomBarShape = const RoundedRectangleBorder(
-    borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+    /*borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20), topRight: Radius.circular(20)),*/
   );
   SnakeBarBehaviour snakeBarStyle = SnakeBarBehaviour.floating;
   EdgeInsets padding = const EdgeInsets.all(0);
 
-  SnakeShape snakeShape = SnakeShape.circle;
+  SnakeShape snakeShape = SnakeShape.indicator;
 
-  bool showSelectedLabels = false;
-  bool showUnselectedLabels = false;
+  bool showSelectedLabels = true;
+  bool showUnselectedLabels = true;
 
   Color selectedColor = Colors.white;
   Color unselectedColor = Colors.red;
@@ -98,15 +99,18 @@ class _IntialScreenState extends State<IntialScreen> {
           pageController.animateToPage(index,
               duration: const Duration(milliseconds: 500), curve: Curves.ease);
         }),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.notifications,), label: 'Notification'),
-          // BottomNavigationBarItem(icon: Icon(Icons.leaderboard),label: 'leaderboard'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today_outlined), label: 'Calendar'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle), label: 'Profile')
+        items: [
+          const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          const BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
+          const BottomNavigationBarItem(icon: Icon(Icons.notifications,), label: 'Notification'),
+          const BottomNavigationBarItem(icon: Icon(Icons.calendar_today_outlined), label: 'Calendar'),
+          BottomNavigationBarItem(icon: Padding(
+            padding: const EdgeInsets.only(bottom: 1),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(UserDetails.photourl.toString(),),
+              radius: 11,
+            ),
+          ), label: 'Profile')
         ],
       ),
       body: Builder(
@@ -161,7 +165,7 @@ class _IntialScreenState extends State<IntialScreen> {
                       ],
                     ),
                     const Text(
-                      "PICT SPORT APP",
+                      "PICT SPORTS APP",
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -188,7 +192,7 @@ class _IntialScreenState extends State<IntialScreen> {
                               ],*/
                             ),
                             child: Icon(
-                              Icons.group_add,
+                              Icons.leaderboard_sharp,
                               size: deviceWidth * 0.05,
                               color: Colors.purple,
                             ),

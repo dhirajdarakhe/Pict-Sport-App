@@ -64,16 +64,6 @@ class _App_DrawerState extends State<App_Drawer> {
                 size: 30,
               ),),
               const SizedBox(height: 15,),
-              DrawerRefactor(onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return EditProfileScreen();
-                }));
-              },text: 'Edit Screen',Icon:
-              const Icon(
-                Icons.edit,
-                color: Colors.white,
-                size: 30,
-              ),),
             ],
           )
         ],
