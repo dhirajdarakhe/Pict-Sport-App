@@ -338,7 +338,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               insta = input;
                             },
                             validator: (input) => input!.startsWith(
-                                "https://www.instagram.com/in/") || input.isEmpty
+                                // "https://www.instagram.com/in/") || input.isEmpty
+                                "https://www.instagram.com/") || input.isEmpty
                                 ? null
                                 : "Enter valid URL",
                           ),

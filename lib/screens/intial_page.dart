@@ -36,6 +36,7 @@ class _IntialScreenState extends State<IntialScreen> {
         pageChanged(index);
       },
       children: const <Widget>[
+        // Profile_Screen(),
         HomeScreen(),
         ChatScreen(),
         Announcement_Screen(),
