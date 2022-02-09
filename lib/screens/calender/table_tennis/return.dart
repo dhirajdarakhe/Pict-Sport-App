@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:psa/screens/calender/table_tennis/requests.dart';
+import 'package:psa/screens/calender/table_tennis/widget.dart';
 
 class ReturnScreen extends StatelessWidget {
   const ReturnScreen({Key? key}) : super(key: key);
@@ -15,9 +15,7 @@ class ReturnScreen extends StatelessWidget {
           ),
           body: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
-                .collection('EquipmentIssuing')
-                .doc('TT')
-                .collection('Equipment')
+                .collection('TTEquipment')
                 .snapshots(),
             builder: (ctx, equimentSnapshot) {
               if (equimentSnapshot.connectionState == ConnectionState.waiting) {
@@ -31,6 +29,8 @@ class ReturnScreen extends StatelessWidget {
                   itemCount: reqMembers.length,
                   itemBuilder: (ctx, index) => reqMembers[index]['isReturn']
                       ? RequestWidget(
+                    returnTime: reqMembers[index]['timeOfReturn'],
+                    requestScreen: false,
                     isAdmin: false,
                     isViewing: false,
                     name: reqMembers[index]['name'],

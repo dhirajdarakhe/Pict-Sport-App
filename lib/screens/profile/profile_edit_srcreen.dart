@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:psa/models/userDetails.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -10,10 +13,21 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  void _onSubmit() {
+ // final formatYMDHM = DateFormat("yyyy-MM-dd");
+  static String hiddenHeadLine="Ex: BasketBall Player";
+  static String hiddenRollNo="00000";
+  static String hiddenLocation="Ex:Aurangabad,Maharashtra";
+  static String hiddenAchivement="Ex: State Level BasketBall Player";
+  static String hiddenAboutMe="Minimum 10 words required";
+  static String hiddenInsta="";
+
+  var _day,_month,_year;
+
+  Future _onSubmit() async{
     try {
       if (formkey.currentState!.validate()) {
         formkey.currentState!.save();
+// <<<<<<< dhiraj_
       if(datetime != DateTime.now()) { print(datetime); }
         print(location);
         print(link);
@@ -23,6 +37,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         print(rollNo);
         print(achivement);
         print(mobile);
+// =======
+        if(datetime != DateTime.now()) {
+          print(datetime); }
+
+        if (headline==hiddenHeadLine){headline=null;}
+        if (rollNo==hiddenRollNo){rollNo=null;}
+        if (location==hiddenLocation){location=null;}
+        if (achivement==hiddenAchivement){achivement=null;}
+        if (aboutUrSelf==hiddenAboutMe){aboutUrSelf=null;}
+        if (insta==hiddenInsta){insta=null;}
+        if (twit==hiddenInsta){twit=null;}
+        if (link==hiddenInsta){link=null;}
+        if (mobile==hiddenInsta){mobile=null;}
+
+        FirebaseFirestore.instance
+        .collection('User').doc(UserDetails.uid)
+        .update({
+          'headLine':headline,
+          'rollNo':rollNo,
+          'location':location,
+          'achievement':achivement,
+          'aboutMe':aboutUrSelf,
+          'insta':insta,
+          'linkedIn':link,
+          'twitter':twit,
+          'whatAppNo':mobile,
+          'dob':dob,
+        });
+// >>>>>>> main
         Navigator.pop(context);
       } else {
         print("null is being printed <=");
@@ -41,6 +84,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String? aboutUrSelf;
   String? insta, twit, link, mobile;
   DateTime datetime = DateTime.now();
+  String? dob;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,18 +127,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Form(
           key: formkey,
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: <Widget>[
-                // ProfileWidget(imagePath: "", onClicked: () async{  },)
-
-
-
-
-                Padding(
+                /*Padding(
                   padding: const EdgeInsets.only(
                       top: 5, left: 12, right: 12, bottom: 19),
                   child: Container(
@@ -137,82 +177,109 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ],
                     ),
                   ),
-                ),
-
-
-
-
-
-
-
+                ),*/
                 TextFormField(
+                  initialValue: UserDetails.headline=='null' || UserDetails.headline==null? hiddenHeadLine:UserDetails.headline,
+                  obscureText: false,
                   decoration: const InputDecoration(labelText: "Headline"),
                   onSaved: (input) {
                     headline = input;
                   },
-                  validator: (input) => input!.length > 4 || input.length == 0
-                      ? null
-                      : "Should be at least 4 char ",
+                  validator: (input) => input!.length > 4 && input.isNotEmpty
+                        ? null
+                        : "Should be at least 4 char ",
+
                 ),
                 TextFormField(
-                  initialValue: "21118",
+                  initialValue: UserDetails.rollNo=='null' || UserDetails.rollNo==null?hiddenRollNo:UserDetails.rollNo,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(labelText: "Roll No"),
                   onSaved: (input) {
                     rollNo = input;
                   },
-                  validator: (input) => input!.length == 5 || input.length == 0
+// <<<<<<< dhiraj_
+//                   validator: (input) => input!.length == 5 || input.length == 0
+// =======
+                  validator: (input) => input!.length == 5 && input.isNotEmpty
+// >>>>>>> main
                       ? null
                       : "Should be 5 char ",
                 ),
-
-                Padding(
-                  padding: const EdgeInsets.only(top: 25, bottom: 6),
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.grey, width: 2)),
-                    child: Column(
-                      children: <Widget>[
-                        const Padding(
-                          padding: EdgeInsets.only(top: 10.0, bottom: 10),
-                          child: Text(
-                            "Date of Birth",
-                            style:
-                                TextStyle(fontSize: 17, color: Colors.black54),
-                          ),
-                        ),
-
-                        Container(
-                          height: 36,
-                          width: 280,
-                          child: CupertinoDatePicker(
-                            initialDateTime: datetime,
-                            mode: CupertinoDatePickerMode.date,
-                            // maximumYear: 2005,
-                            onDateTimeChanged: (datetime) => setState(
-                              () {
-                                this.datetime = datetime;
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
+                const SizedBox(height: 15,),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Birthdate:  ",
+                      style: TextStyle(
+                        fontSize: 17,
+                       // fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
+                    Text(
+                      UserDetails.birthday==null || UserDetails.birthday=='null'?''
+                          : UserDetails.birthday.toString(),
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    const Spacer(
+                      flex: 2,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        showDatePicker(
+                            context: context,
+                            initialDate: DateTime(1995),
+                            firstDate: DateTime(1995),
+                            lastDate: DateTime.now())
+                            .then((value) {
+                          setState(() {
+                            print('start');
+                           _day=value?.day;
+                           print(_day);
+                           _month=value?.month;
+                           print(_month);
+                           _year=value?.year;
+                           print(_year);
+                           dob=(_day.toString()+'/'+_month.toString()+'/'+_year.toString());
+                           UserDetails.birthday=dob;
+                          });
+                        });
+                        print(dob);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 25,
+                        width: 90,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(17),
+                          color: Colors.blue,
+                        ),
+                        child: const Text(
+                          "Change",
+                          style: TextStyle(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+// <<<<<<< dhiraj_
 
 
 
 
 
+// =======
+// >>>>>>> main
                 TextFormField(
+                  initialValue: UserDetails.location=='null' || UserDetails.location==null?hiddenLocation:UserDetails.location,
                   decoration: const InputDecoration(labelText: "Location"),
                   onSaved: (input) {
                     location = input;
                   },
-                  validator: (input) => input!.length == 0 || input.length > 2
+                  validator: (input) => input!.isNotEmpty && input.length > 2
                       ? null
                       : "Should be at least 4 char ",
                 ),
@@ -226,28 +293,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: TextFormField(
+                        initialValue: UserDetails.achivement=='null' || UserDetails.achivement==null?hiddenAchivement:UserDetails.achivement,
                         decoration:
                             const InputDecoration(labelText: "Achivement"),
                         onSaved: (input) {
                           achivement = input;
                         },
                         validator: (input) =>
-                            input!.length > 10 || input.length == 0
-                                ? null
-                                : "Should be at least 10 char ",
+                          input!.length > 10 && input.isNotEmpty
+                              ? null
+                              : "Should be at least 10 char ",
                       ),
                     ),
                   ],
                 ),
                 TextFormField(
-                  maxLines: 3,
+                  initialValue: UserDetails.aboutMe=='null' || UserDetails.aboutMe==null?hiddenAboutMe:UserDetails.aboutMe,
+                  maxLines: 2,
                   keyboardType: TextInputType.multiline,
                   decoration:
                       const InputDecoration(labelText: "About Your self"),
                   onSaved: (input) {
                     aboutUrSelf = input;
                   },
-                  validator: (input) => input!.length > 10 || input.length == 0
+                  validator: (input) => input!.length > 10 && input.isNotEmpty
                       ? null
                       : "Should be at least 10 char ",
                 ),
@@ -274,12 +343,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            initialValue: UserDetails.instaUrl=='null'?hiddenInsta:UserDetails.instaUrl,
                             onSaved: (input) {
                               insta = input;
                             },
                             validator: (input) => input!.startsWith(
-                                        "https://www.instagram.com/in/") ||
-                                    input.length == 0
+                                        "https://www.instagram.com/in/") || input.isEmpty
                                 ? null
                                 : "Enter valid URL",
                           ),
@@ -299,6 +368,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            initialValue: UserDetails.twitterUrl=='null'?hiddenInsta:UserDetails.twitterUrl,
                             onSaved: (input) {
                               twit = input;
                             },
@@ -322,12 +392,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            initialValue: UserDetails.linkedInUrl=='null'?hiddenInsta:UserDetails.linkedInUrl,
                             onSaved: (input) {
                               link = input;
                             },
                             validator: (input) => input!.startsWith(
                                         "https://www.linkedin.com/in/") ||
-                                    input.length == 0
+                                    input.isEmpty
                                 ? null
                                 : "Enter valid URL",
                           ),
@@ -342,11 +413,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           size: 37,
                         ),
                         const Text(
-                          " Whatsappno ",
+                          " WhatsApp's No ",
                           style: TextStyle(fontSize: 17, color: Colors.black87),
                         ),
                         Expanded(
                           child: TextFormField(
+                            initialValue: UserDetails.whatAppNo=='null'?hiddenInsta:UserDetails.whatAppNo,
                             keyboardType: TextInputType.number,
                             onFieldSubmitted: (_) {
                               _onSubmit();
@@ -355,7 +427,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               mobile = input;
                             },
                             validator: (input) =>
-                                input!.length == 10 || input.length == 0
+                                input!.length == 10 || input.isEmpty
                                     ? null
                                     : "Enter valid mobile number",
                           ),
