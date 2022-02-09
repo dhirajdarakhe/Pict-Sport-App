@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/drawer/users.dart';
+import 'package:psa/screens/profile/profile_edit_srcreen.dart';
 import 'package:psa/services/authentication.dart';
 
 class App_Drawer extends StatefulWidget {
@@ -62,6 +63,7 @@ class _App_DrawerState extends State<App_Drawer> {
                 color: Colors.white,
                 size: 30,
               ),),
+              const SizedBox(height: 15,),
             ],
           )
         ],

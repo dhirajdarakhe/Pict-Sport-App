@@ -1,5 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+// <<<<<<< new_dhiraj
+import 'package:psa/models/userDetails.dart';
+import 'package:psa/screens/otherUserDetails/userprofilescreen.dart';
+// =======
+// >>>>>>> main
 import 'package:psa/screens/profile/profile_screen.dart';
 
 import '../otherUserProfile.dart';
@@ -40,22 +45,21 @@ class _AllUsersState extends State<AllUsers> {
           return ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemCount: usersnap.length,
-              itemBuilder: (ctx, index){
-                final _userTile = usersnap[index];
-                return UserWidget(
-                    onTap: () {
-                      setState(() {
-                        isViewer=_userTile['uid'];
-                      });
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                            return OtherUserProfile();
-                          }));
-                    },
-                    misId: usersnap[index]['misId'],
-                    name: usersnap[index]['name'],
-                    url: usersnap[index]['photourl']);
-              });
+              itemBuilder: (ctx, index) => UserWidget(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return OtherUserProfileScreeen(
+                        mis: usersnap[index]['misId'],
+                        email: usersnap[index]['email'],
+                        name: usersnap[index]['name'],
+                        photourl: usersnap[index]['photourl'],
+                      );
+                    }));
+                  },
+                  misId: usersnap[index]['misId'],
+                  name: usersnap[index]['name'],
+                  url: usersnap[index]['photourl']));
         },
       ),
     );
@@ -81,9 +85,27 @@ class UserWidget extends StatelessWidget {
           width: double.infinity,
           child: Row(
             children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(url.toString()),
-                radius: 25,
+              // CircleAvatar(
+              //   backgroundImage: NetworkImage(url.toString()),
+              //   radius: 25,
+              // ),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: CircleAvatar(
+                    radius: 34,
+                    backgroundColor: Colors.blue,
+                    child: CircleAvatar(
+                      radius: 32,
+                      backgroundColor: Colors.white,
+                      child: CircleAvatar(
+                        radius: 28,
+                        backgroundImage: NetworkImage(url.toString()),
+                      ),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 width: 15,
@@ -108,7 +130,7 @@ class UserWidget extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

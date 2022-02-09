@@ -28,7 +28,20 @@ dependencies:
   direct_select: ^2.0.0
   dropdown_button2: ^1.1.1
   lottie: ^1.2.1
+# <<<<<<< new_dhiraj
+  circular_profile_avatar: ^2.0.5
+  flutter_speed_dial: ^5.0.0+1
+  url_launcher: ^6.0.18
+#  uses-material-design: true
+  material_design_icons_flutter: ^5.0.6595
 
+
+
+# =======
+  datetime_picker_formfield: ^2.0.0
+  intl: ^0.17.0
+  date_util: ^0.1.4
+# >>>>>>> main
 
 dev_dependencies:
   flutter_test:
