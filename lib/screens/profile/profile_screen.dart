@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/profile/helper/widget/sport_container.dart';
+import 'package:psa/services/authentication.dart';
 import 'helper/widget/StackConatiner2.dart';
 
 class Profile_Screen extends StatefulWidget {
@@ -12,10 +13,8 @@ class Profile_Screen extends StatefulWidget {
 }
 
 class _Profile_ScreenState extends State<Profile_Screen> {
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -25,7 +24,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
               StackContainer2(),
               Padding(
                 padding:
-                const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
+                    const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
                 child: Row(
                   children: <Widget>[
                     Padding(
@@ -35,8 +34,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                             FontAwesomeIcons.instagram,
                             size: 35,
                           ),
-                          onPressed: () {
-                          }),
+                          onPressed: () {}),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0),
@@ -45,9 +43,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                             FontAwesomeIcons.twitter,
                             size: 35,
                           ),
-                          onPressed: () {
-
-                          }),
+                          onPressed: () {}),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 11.0),
@@ -72,31 +68,42 @@ class _Profile_ScreenState extends State<Profile_Screen> {
               ),
               Padding(
                 padding:
-                const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
-                child: EmailORMisId2(mail: UserDetails.email,
-                  misid: UserDetails.misId,),
+                    const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
+                child: EmailORMisId2(
+                  mail: UserDetails.email,
+                  misid: UserDetails.misId,
+                ),
               ),
-              UserDetails.achivement == null || UserDetails.achivement=='null'?Container(): Padding(
-                child: sportContainer(fondSize: 17,
-                    headline: "Achievement in sport",
-                    Discription: UserDetails.achivement),
-                padding:
-                const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
-              ),
+              UserDetails.achivement == null || UserDetails.achivement == 'null'
+                  ? Container()
+                  : Padding(
+                      child: sportContainer(
+                          fondSize: 17,
+                          headline: "Achievement in sport",
+                          Discription: UserDetails.achivement),
+                      padding: const EdgeInsets.only(
+                          left: 11.0, right: 11, bottom: 15),
+                    ),
               Padding(
                 padding:
-                const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
+                    const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       'Sports Intersected',
                       textAlign: TextAlign.start,
-                      style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Container(
-                      height: 60,
+                      height: 75,
+                      padding: const EdgeInsets.only(
+                        left: 10,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.white,
@@ -108,12 +115,14 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                         ],
                       ),
                       child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: UserDetails.mySportEmoji?.length,
-                          itemBuilder: (ctx,index)=> Container(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10,top: 15),
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: UserDetails.mySportEmoji?.length,
+                        itemBuilder: (ctx, index) => Container(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 10, top: 15, bottom: 10),
+                            child: Container(
                               child: Text(
                                 UserDetails.mySportEmoji![index],
                                 style: const TextStyle(
@@ -121,21 +130,69 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                                 ),
                               ),
                             ),
-                          )),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
-              UserDetails.aboutMe==null || UserDetails.aboutMe=='null'?Container(): Padding(
-                padding:
-                const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
-                child: sportContainer(
-                  headline: "About myself ",
-                  Discription: UserDetails.aboutMe, fondSize: 17,
+              UserDetails.aboutMe == null || UserDetails.aboutMe == 'null'
+                  ? Container()
+                  : Padding(
+                      padding: const EdgeInsets.only(
+                          left: 11.0, right: 11, bottom: 15),
+                      child: sportContainer(
+                        headline: "About myself ",
+                        Discription: UserDetails.aboutMe,
+                        fondSize: 17,
+                      ),
+                    ),
+
+              //   logout button
+
+              const SizedBox(
+                height: 18,
+              ),
+              Container(
+                width: 250,
+                height: 60,
+                // margin: const EdgeInsets.all(12.0),
+                child: RaisedButton(
+                  splashColor: Colors.lightBlueAccent,
+                  elevation: 10.0,
+                  shape: const StadiumBorder(),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children:const <Widget> [
+                      Icon(
+                        Icons.logout_outlined,
+                        color: Colors.black87,
+                        size: 30,
+                      ),
+                      Text(
+                        'Log Out',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {
+                    Authentication().signOut(context);
+                  },
                 ),
+              ),
+              const SizedBox(
+                height: 18,
               ),
             ],
           ),
         ));
   }
 }
+
+//
+// onTap: (){
+//
+// },
+// text: 'Logout',Icon:
+// const

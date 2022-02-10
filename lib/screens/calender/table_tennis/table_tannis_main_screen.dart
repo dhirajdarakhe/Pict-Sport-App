@@ -15,76 +15,86 @@ class TabletannisScreen extends StatefulWidget {
 }
 
 class _TabletannisScreenState extends State<TabletannisScreen> {
+  late int _isRequested = 0;
+  bool _isFirstVisit = false;
+  var _table, _noOfRacket;
+  int racket1 = 0, racket2 = 0, racket3 = 0;
 
-  late int _isRequested=0;
-  bool _isFirstVisit=false;
-  var _table,_noOfRacket;
-  int racket1=0,racket2=0,racket3=0;
-
-  Future TT_Logic()async{
-    _isFirstVisit?Navigator.push(context,
-        MaterialPageRoute(builder: (context) {
-          return IssueTheRacket();
-        })):_isRequested==1? showDialog(
-        context: context,
-        builder: (context) {
-          return PopUpRequest(onTap: (){
-            FirebaseFirestore.instance.collection('TTEquipment')
-                //.doc('TT').collection('Equipment')
-                .doc(UserDetails.uid).update({
-              'isRequested':3,
-            });
-            setState(() {
-              _isFirstVisit=true;
-            });
-            Navigator.pop(context);
-          },
-              text: 'Want to cancel the request');
-          //---------
-        }):_isRequested==2? showDialog(context: context,
-        builder: (context){
-          return ReturnPopUpWidget(
-              noOfRacket: _noOfRacket,
-              table: _table,
-              onTap: (){
-                FirebaseFirestore.instance.collection('TTEquipment')
-                    //.doc('TT').collection('Equipment')
-                    .doc(UserDetails.uid).update({
-                  'isRequested':4,
-                  'isReturn':true,
-                  'timeOfReturn':Timestamp.now(),
-                });
-                setState(() {
-                  _isFirstVisit=true;
-                });
-                Navigator.pop(context);
-              });
-        }):Navigator.push(context,
-        MaterialPageRoute(builder: (context) {
-          return IssueTheRacket();
-        }));
+  Future TT_Logic() async {
+    _isFirstVisit
+        ? Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const IssueTheRacket();
+          }))
+        : _isRequested == 1
+            ? showDialog(
+                context: context,
+                builder: (context) {
+                  return PopUpRequest(
+                      onTap: () {
+                        FirebaseFirestore.instance
+                            .collection('TTEquipment')
+                            //.doc('TT').collection('Equipment')
+                            .doc(UserDetails.uid)
+                            .update({
+                          'isRequested': 3,
+                        });
+                        setState(() {
+                          _isFirstVisit = true;
+                        });
+                        Navigator.pop(context);
+                      },
+                      text: 'Want to cancel the request');
+                  //---------
+                })
+            : _isRequested == 2
+                ? showDialog(
+                    context: context,
+                    builder: (context) {
+                      return ReturnPopUpWidget(
+                          noOfRacket: _noOfRacket,
+                          table: _table,
+                          onTap: () {
+                            FirebaseFirestore.instance
+                                .collection('TTEquipment')
+                                //.doc('TT').collection('Equipment')
+                                .doc(UserDetails.uid)
+                                .update({
+                              'isRequested': 4,
+                              'isReturn': true,
+                              'timeOfReturn': Timestamp.now(),
+                            });
+                            setState(() {
+                              _isFirstVisit = true;
+                            });
+                            Navigator.pop(context);
+                          });
+                    })
+                : Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const IssueTheRacket();
+                  }));
   }
 
-  Future<void> getStatus(BuildContext context)async{
-    var v =await FirebaseFirestore.instance.collection('TTEquipment')
-        .doc(UserDetails.uid).get();
-    if (v.exists){
-      _isRequested=v.get('isRequested');
-      _table=v.get('tableNumber');
-      _noOfRacket=v.get('racketNumber');
-      if (_isRequested==3 || _isRequested==5){
+  Future<void> getStatus(BuildContext context) async {
+    var v = await FirebaseFirestore.instance
+        .collection('TTEquipment')
+        .doc(UserDetails.uid)
+        .get();
+    if (v.exists) {
+      _isRequested = v.get('isRequested');
+      _table = v.get('tableNumber');
+      _noOfRacket = v.get('racketNumber');
+      if (_isRequested == 3 || _isRequested == 5) {
         setState(() {
-          _isFirstVisit=true;
+          _isFirstVisit = true;
         });
-      }else{
+      } else {
         setState(() {
-          _isFirstVisit=false;
+          _isFirstVisit = false;
         });
       }
-      }
-    else{
+    } else {
       setState(() {
-        _isFirstVisit=true;
+        _isFirstVisit = true;
       });
     }
   }
@@ -96,156 +106,341 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(""
-              "Table Tennis",),
+          centerTitle: true,
+          title: const Text(
+            ""
+            "Table Tennis",
+          ),
           actions: [
-            IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context){
-                return Request();
-              }));
-            },
-                icon: const Icon(Icons.request_page_outlined,size: 30,)),
-            IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context){
-                return Playing();
-              }));
-            },
-                icon: const Icon(Icons.change_history_outlined,size: 30,)),
-            IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context){
-                return ReturnScreen();
-              }));
-            },
-                // icon: const Icon(Icons.read_more_outlined,size: 30,)),
-                icon: const Icon(Icons.compare_arrows,size: 30,)),
+            Theme(
+              data: Theme.of(context).copyWith(
+                  iconTheme: const IconThemeData(color: Colors.white),
+                  textSelectionColor: Colors.blue,
+                  dividerColor: Colors.white),
+              child: PopupMenuButton<int>(
+                  color: Colors.indigo,
+                  onSelected: (item) => onSelected(context, item),
+                  itemBuilder: (context) => [
+                        const PopupMenuItem<int>(
+                          value: 0,
+                          child: Text(
+                            "Requested",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        const PopupMenuItem<int>(
+                          value: 1,
+                          child: Text(
+                            "Issued",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        const PopupMenuDivider(),
+                        const PopupMenuItem<int>(
+                          value: 2,
+                          child: Text(
+                            " Returned ",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ]),
+            )
           ],
+          // actions: [
+          //   IconButton(onPressed: (){
+          //     Navigator.push(context, MaterialPageRoute(builder: (context){
+          //       return Request();
+          //     }));
+          //   },
+          //       icon: const Icon(Icons.request_page_outlined,size: 30,)),
+          //   IconButton(onPressed: (){
+          //     Navigator.push(context, MaterialPageRoute(builder: (context){
+          //       return Playing();
+          //     }));
+          //   },
+          //       icon: const Icon(Icons.change_history_outlined,size: 30,)),
+          //   IconButton(onPressed: (){
+          //     Navigator.push(context, MaterialPageRoute(builder: (context){
+          //       return ReturnScreen();
+          //     }));
+          //   },
+          //       // icon: const Icon(Icons.read_more_outlined,size: 30,)),
+          //       icon: const Icon(Icons.compare_arrows,size: 30,)),
+          // ],
         ),
         body: RefreshIndicator(
-          onRefresh: ()=> getStatus(context),
+          onRefresh: () => getStatus(context),
           child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance.
-            collection('TTEquipment').snapshots(),
-            builder:(ctx, userSnapshot){
-              if (userSnapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              final usersnap = userSnapshot.data!.docs;
-              racket1=0;racket3=0;racket2=0;
-
-              print('start');
-              for(int i=0;i<usersnap.length;i++){
-                if (usersnap[i]['tableNumber']=='Table 1'){
-                  print('racket 1');
-                  if (usersnap[i]['isRequested']==2){
-                    racket1+=int.parse(usersnap[i]['racketNumber']);
-                  }
-                  print(racket1);
-                }else if (usersnap[i]['tableNumber']=='Table 2'){
-                  print('racket 2 initial');
-                  print(racket2);
-                  if (usersnap[i]['isRequested']==2){
-                    racket2+=int.parse(usersnap[i]['racketNumber']);
-                  }
-                  print('racket 2 after');
-                  print(racket2);
-                }else if (usersnap[i]['tableNumber']=='Table 3'){
-                  print('racket 3 inital');
-                  print(racket3);
-                  if (usersnap[i]['isRequested']==2){
-                    racket3+=int.parse(usersnap[i]['racketNumber']);
-                  }
-                  print('racket 3 after');
-                  print(racket3);
+              stream: FirebaseFirestore.instance
+                  .collection('TTEquipment')
+                  .snapshots(),
+              builder: (ctx, userSnapshot) {
+                if (userSnapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
-              }
-              if (racket1<0){racket1=0;}
-              if (racket2<0){racket2=0;}
-              if (racket3<0){racket3=0;}
-              print(racket1);
-              print(racket2);
-              print(racket3);
-              print('end');
-              return  SingleChildScrollView(
-                child: Padding(
-                  padding:
-                  const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 15),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TTWidget(tableNumber: '01',
-                        enrolledSeats: racket1,
-                        image: "assets/table_tenis_1.jpg",),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TTWidget(image: "assets/table_tenis_2.jpg",
-                          enrolledSeats: racket2, tableNumber: '02'),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TTWidget(image: "assets/table_tenis_1.jpg",
-                        enrolledSeats: racket3,tableNumber: '03',),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Container(
-                        width: 200,
-                        height: 60,
-                        // margin: const EdgeInsets.all(12.0),
-                        child: RaisedButton(
-                          splashColor: Colors.lightBlueAccent,
-                          elevation: 10.0, shape: const StadiumBorder(),
-                          child:_isFirstVisit? const Text(
-                            'Issue the Racked',
-                            style: TextStyle(fontSize: 16),
-                          ):_isRequested==1? const Text(
-                            'Cancel Request',
-                            style: TextStyle(fontSize: 16),
-                          ):_isRequested==2? const Text(
-                            'Return the Racket',
-                            style: TextStyle(fontSize: 16),
-                          ):_isRequested==4?const Text(
-                            'Issue the Racked',
-                            style: TextStyle(fontSize: 16),
-                          ): Container(),
-                          onPressed: () {
-                            TT_Logic();
-                          },
+                final usersnap = userSnapshot.data!.docs;
+                racket1 = 0;
+                racket3 = 0;
+                racket2 = 0;
+
+                print('start');
+                for (int i = 0; i < usersnap.length; i++) {
+                  if (usersnap[i]['tableNumber'] == 'Table 1') {
+                    print('racket 1');
+                    if (usersnap[i]['isRequested'] == 2) {
+                      racket1 += int.parse(usersnap[i]['racketNumber']);
+                    }
+                    print(racket1);
+                  } else if (usersnap[i]['tableNumber'] == 'Table 2') {
+                    print('racket 2 initial');
+                    print(racket2);
+                    if (usersnap[i]['isRequested'] == 2) {
+                      racket2 += int.parse(usersnap[i]['racketNumber']);
+                    }
+                    print('racket 2 after');
+                    print(racket2);
+                  } else if (usersnap[i]['tableNumber'] == 'Table 3') {
+                    print('racket 3 inital');
+                    print(racket3);
+                    if (usersnap[i]['isRequested'] == 2) {
+                      racket3 += int.parse(usersnap[i]['racketNumber']);
+                    }
+                    print('racket 3 after');
+                    print(racket3);
+                  }
+                }
+                if (racket1 < 0) {
+                  racket1 = 0;
+                }
+                if (racket2 < 0) {
+                  racket2 = 0;
+                }
+                if (racket3 < 0) {
+                  racket3 = 0;
+                }
+                print(racket1);
+                print(racket2);
+                print(racket3);
+                print('end');
+                return SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15, right: 15, top: 10, bottom: 15),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 10,
                         ),
-                      )
-                    ],
+                        // TTWidget(
+                        //   tableNumber: '01',
+                        //   enrolledSeats: racket1,
+                        //   image: "assets/table_tenis_1.jpg",
+                        // ),
+                        // const SizedBox(
+                        //   height: 15,
+                        // ),
+                        // TTWidget(
+                        //     image: "assets/table_tenis_2.jpg",
+                        //     enrolledSeats: racket2,
+                        //     tableNumber: '02'),
+                        // const SizedBox(
+                        //   height: 15,
+                        // ),
+                        // TTWidget(
+                        //   image: "assets/table_tenis_1.jpg",
+                        //   enrolledSeats: racket3,
+                        //   tableNumber: '03',
+                        // ),aea28c
+                        table_image(
+                          totalseats: 4,
+                          image: "assets/table_tennis_22.png",
+                          tableNumber: '01',
+                          enrolledSeats: racket1,
+                        ),
+
+                        table_image(
+                          totalseats: 4,
+                          image: "assets/table_tennis_11.png",
+                          tableNumber: '02',
+                          enrolledSeats: racket2,
+                        ),
+
+                        table_image(
+                          totalseats: 4,
+                          image: "assets/table_tennis_22.png",
+                          tableNumber: '03',
+                          enrolledSeats: racket3,
+                        ),
+
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          width: 200,
+                          height: 60,
+                          // margin: const EdgeInsets.all(12.0),
+                          child: RaisedButton(
+                            splashColor: Colors.lightBlueAccent,
+                            elevation: 10.0,
+                            shape: const StadiumBorder(),
+                            child: _isFirstVisit
+                                ? const Text(
+                                    'Issue the Racked',
+                                    style: TextStyle(fontSize: 16),
+                                  )
+                                : _isRequested == 1
+                                    ? const Text(
+                                        'Cancel Request',
+                                        style: TextStyle(fontSize: 16),
+                                      )
+                                    : _isRequested == 2
+                                        ? const Text(
+                                            'Return the Racket',
+                                            style: TextStyle(fontSize: 16),
+                                          )
+                                        : _isRequested == 4
+                                            ? const Text(
+                                                'Issue the Racked',
+                                                style: TextStyle(fontSize: 16),
+                                              )
+                                            : Container(),
+                            onPressed: () {
+                              TT_Logic();
+                            },
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }
-          ),
+                );
+              }),
         ));
+  }
+
+  void onSelected(BuildContext context, int item) {
+    switch (item) {
+      case 0:
+        print("First button is pressed");
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return const Request();
+        }));
+        break;
+      case 1:
+        print("second button is pressed");
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return const Playing();
+        }));
+        break;
+      case 2:
+        print("second button is pressed");
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return const ReturnScreen();
+        }));
+        break;
+    }
   }
 }
 
-
-
+class table_image extends StatelessWidget {
+  // const table_image({
+  //   Key? key,
+  // }) : super(key: key);
+  late String tableNumber;
+  late String image;
+  late int enrolledSeats;
+  late int totalseats;
+  table_image({
+    required this.image,
+    required this.enrolledSeats,
+    required this.tableNumber,
+    required this.totalseats,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        height: 210,
+        child: Stack(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                border: Border.all(color: Colors.lightBlue, width: 2),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  border: Border.all(color: const Color(0xffaea28c), width: 7),
+                  image: DecorationImage(
+                    image: AssetImage(image),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 38.0),
+                child: Container(
+                  child: Text(
+                    "TABLE NO ${tableNumber}",
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: Container(
+                  child:  Text(
+                    "Available Rackets :  ${totalseats - enrolledSeats} (out of ${totalseats})",
+                    style: const TextStyle(
+                        color: Color(0xff004d00), fontWeight: FontWeight.w800),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class TTWidget extends StatelessWidget {
   late String tableNumber;
   late String image;
   late int enrolledSeats;
-  TTWidget({required this.image,
-    required this.enrolledSeats,required this.tableNumber});
+  TTWidget(
+      {required this.image,
+      required this.enrolledSeats,
+      required this.tableNumber});
 
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -269,13 +464,14 @@ class TTWidget extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              height: height*0.2,
+              height: height * 0.2,
               padding: const EdgeInsets.only(right: 10),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
-                border: Border.all(color: Colors.black,width: 5),
+                border: Border.all(color: Colors.black, width: 5),
                 image: DecorationImage(
                   image: AssetImage(image),
                   fit: BoxFit.cover,
@@ -293,9 +489,10 @@ class TTWidget extends StatelessWidget {
               alignment: Alignment.center,
               decoration: const BoxDecoration(
                 color: Colors.redAccent,
-                borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(20),
                     bottomLeft: Radius.circular(20)),
-               // border: Border.all(color: Colors.grey,width: 5),
+                // border: Border.all(color: Colors.grey,width: 5),
               ),
               child: Text(enrolledSeats.toString()),
             )
