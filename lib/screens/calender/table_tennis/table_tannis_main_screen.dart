@@ -132,6 +132,7 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
+                    const PopupMenuDivider(),
                         const PopupMenuItem<int>(
                           value: 1,
                           child: Text(
@@ -349,13 +350,12 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
 }
 
 class table_image extends StatelessWidget {
-  // const table_image({
-  //   Key? key,
-  // }) : super(key: key);
+
   late String tableNumber;
   late String image;
   late int enrolledSeats;
   late int totalseats;
+
   table_image({
     required this.image,
     required this.enrolledSeats,
@@ -364,10 +364,11 @@ class table_image extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    double height=MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        height: 210,
+        height: height*0.23,
         child: Stack(
           children: <Widget>[
             Container(
