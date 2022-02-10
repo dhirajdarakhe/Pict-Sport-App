@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
 
+
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
 
@@ -26,7 +27,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     try {
       if (formkey.currentState!.validate()) {
         formkey.currentState!.save();
-
+        if (dob==UserDetails.birthday){
+          print('euu');
+          print(dob);
+          print(UserDetails.birthday);
+        }
         if (headline==hiddenHeadLine){headline=null;}
         if (rollNo==hiddenRollNo){rollNo=null;}
         if (location==hiddenLocation){location=null;}
@@ -49,7 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           'linkedIn':link,
           'twitter':twit,
           'whatAppNo':mobile,
-          'dob':dob,
+          'dob':UserDetails.birthday,
         });
         setState(() {
           UserDetails.headline=headline;
@@ -64,7 +69,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           UserDetails.birthday=dob;
         });
         Navigator.pop(context);
-
 
       } else {
         print("null is being printed <=");
@@ -93,7 +97,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         leading: TextButton(
           onPressed: () {
             Navigator.pop(context);
-           /* Navigator.pushReplacement(context,
+            /*Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) {
                   return Profile_Screen();
                 }));*/
@@ -136,50 +140,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: <Widget>[
-                /*Padding(
-                  padding: const EdgeInsets.only(
-                      top: 5, left: 12, right: 12, bottom: 19),
-                  child: Container(
-                    height: 180,
-                    width: double.infinity,
-                    child: Stack(
-                      children: <Widget>[
-                        const Padding(
-                          padding: EdgeInsets.only(top: 12.0),
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: CircleAvatar(
-                              radius: 65,
-                              backgroundColor: Colors.grey,
-                              child: CircleAvatar(
-                                radius: 63,
-                                backgroundColor: Colors.white,
-                                child: CircleAvatar(
-                                  radius: 58,
-                                  backgroundImage: NetworkImage(
-                                      'https://lh3.googleusercontent.com/a-/AOh14GiI2oRbxg9hBNUSaJE4WVIJMJpRrGHAubWB-BpTzw=s96-c'),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: GestureDetector(
-                            onTap: () {
-                              print("Change the profile picture");
-                            },
-                            child: const Text(
-                              "Change the Profile photo",
-                              style: TextStyle(
-                                  color: Colors.blueAccent, fontSize: 18),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),*/
                 TextFormField(
                   initialValue: UserDetails.headline=='null' || UserDetails.headline==null? hiddenHeadLine:UserDetails.headline,
                   obscureText: false,
@@ -233,6 +193,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             lastDate: DateTime.now())
                             .then((value) {
                           setState(() {
+
                             print('start');
                             _day=value?.day;
                             print(_day);

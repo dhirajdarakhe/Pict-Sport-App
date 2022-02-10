@@ -1,13 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-// <<<<<<< new_dhiraj
-import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/otherUserDetails/userprofilescreen.dart';
-// =======
-// >>>>>>> main
-import 'package:psa/screens/profile/profile_screen.dart';
 
-import '../otherUserProfile.dart';
 
 class AllUsers extends StatefulWidget {
   const AllUsers({Key? key}) : super(key: key);
@@ -50,10 +44,7 @@ class _AllUsersState extends State<AllUsers> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return OtherUserProfileScreeen(
-                        mis: usersnap[index]['misId'],
-                        email: usersnap[index]['email'],
-                        name: usersnap[index]['name'],
-                        photourl: usersnap[index]['photourl'],
+                        uid: usersnap[index]['uid'],
                       );
                     }));
                   },

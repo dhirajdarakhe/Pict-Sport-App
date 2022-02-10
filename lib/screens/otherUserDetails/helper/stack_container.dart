@@ -6,7 +6,8 @@ import 'top_bar.dart';
 class StackContainer extends StatelessWidget {
 String? imageUrl ;
 String? name;
-StackContainer({required this.imageUrl, required this.name});
+String? misId;
+StackContainer({required this.misId,required this.imageUrl, required this.name});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,20 +67,50 @@ StackContainer({required this.imageUrl, required this.name});
                 ),
                 const SizedBox(height: 10.0),
                  Text(
-                  "mr. ${name}",
+                  name!,
                   style: const TextStyle(
                     fontSize: 21.0,color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const Text(
-                  "PICT, PUNE (SE)",
+                  "PICT, PUNE",
                   style: TextStyle(
                     fontSize: 12.0,
                     color: Colors.black
                   ),
                 ),
-
+                misId![0].toString() == 'C' ||
+                    misId![0].toString() == 'c'
+                    ? const Text(
+                  'Computer Department',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.grey,
+                    fontStyle: FontStyle.italic,
+                  ),
+                )
+                    : misId![0] == 'I' ||
+                    misId![0] == 'i'
+                    ? const Text(
+                  'Information Technology',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.grey,
+                    fontStyle: FontStyle.italic,
+                  ),
+                )
+                    : misId![0] == 'E' ||
+                    misId![0] == 'e'
+                    ? const Text(
+                  'Electronics Department',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.grey,
+                    fontStyle: FontStyle.italic,
+                  ),
+                )
+                    : Container(),
               ],
             ),
           ),

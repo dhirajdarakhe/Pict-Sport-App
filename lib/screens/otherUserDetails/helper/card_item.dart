@@ -17,12 +17,11 @@ class CardItem extends StatefulWidget {
 }
 
 class _CardItemState extends State<CardItem> {
-  bool? _ismisId = false;
   String? idname = "Mis Id";
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
@@ -39,12 +38,14 @@ class _CardItemState extends State<CardItem> {
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 16.0,
-            vertical: 15.0,
+            vertical: 10.0,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              widget.inputString1=='Achievement'?
+                  const Icon(Icons.leaderboard_sharp,size: 40,):
               widget.inputString1 == 'About Myself'
                   ? const Icon(
                       Icons.account_circle_rounded,
