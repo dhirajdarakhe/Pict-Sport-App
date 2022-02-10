@@ -11,24 +11,6 @@ class StackContainer2 extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Container(
-      // height: (UserDetails.headline == null ||
-      //             UserDetails.headline == 'null') &&
-      //         (UserDetails.rollNo == null || UserDetails.rollNo == 'null') &&
-      //         (UserDetails.birthday == null ||
-      //             UserDetails.birthday == 'null') &&
-      //         (UserDetails.location == null || UserDetails.location == 'null')
-      //     ? height * 0.42
-      //     : (UserDetails.headline == null || UserDetails.headline == 'null') ||
-      //             (UserDetails.rollNo == null ||
-      //                 UserDetails.rollNo == 'null') ||
-      //             (UserDetails.birthday == null ||
-      //                 UserDetails.birthday == 'null') ||
-      //             (UserDetails.location == null ||
-      //                 UserDetails.location == 'null')
-      //         ? height * 0.47
-      //         : height * 0.52,
-      // height: 250,
-      // color:Colors.red,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -37,8 +19,7 @@ class StackContainer2 extends StatelessWidget {
               ClipPath(
                 clipper: MyCustomClipper2(),
                 child: Container(
-                  // height: height * 0.37,
-                  height: 250,
+                  height: 300,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(color: Colors.black, width: 5),
@@ -68,6 +49,7 @@ class StackContainer2 extends StatelessWidget {
                     color: Colors.black87,
                   ),
                   onPressed: () {
+                    print(UserDetails.birthday);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -80,7 +62,7 @@ class StackContainer2 extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 120,
+                top: 170,
                 left: 2,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -267,7 +249,7 @@ class StackContainer2 extends StatelessWidget {
                 UserDetails.misId![0].toString() == 'C' ||
                         UserDetails.misId![0].toString() == 'c'
                     ? const Text(
-                        'Computer Section ,',
+                        'Computer Department',
                         style: TextStyle(
                           fontSize: 14.0,
                           color: Colors.grey,
@@ -277,7 +259,7 @@ class StackContainer2 extends StatelessWidget {
                     : UserDetails.misId![0] == 'I' ||
                             UserDetails.misId![0] == 'i'
                         ? const Text(
-                            'Information Technology ,',
+                            'Information Technology',
                             style: TextStyle(
                               fontSize: 14.0,
                               color: Colors.grey,
@@ -287,7 +269,7 @@ class StackContainer2 extends StatelessWidget {
                         : UserDetails.misId![0] == 'E' ||
                                 UserDetails.misId![0] == 'e'
                             ? const Text(
-                                'Electronics Section ,',
+                                'Electronics Department',
                                 style: TextStyle(
                                   fontSize: 14.0,
                                   color: Colors.grey,
