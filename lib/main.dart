@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
+
     if (user!=null){
       return MaterialApp(
         title: 'Flutter Demo',

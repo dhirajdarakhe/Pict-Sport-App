@@ -15,6 +15,7 @@ class Playing extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            centerTitle: true,
             title: const Text('Rackets Issued'),
           ),
           body: StreamBuilder<QuerySnapshot>(
