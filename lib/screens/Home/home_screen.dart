@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:psa/screens/drawer/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,22 +12,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const Drawer(
+        child: App_Drawer(),
+      ),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             actions: [
               Container(
                 margin: const EdgeInsets.only(right: 16),
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   backgroundImage: NetworkImage(
                     'https://picsum.photos/250?image=9',
                   ),
                 ),
               ),
             ],
-            leading: const Tab(
-              icon: Icon(Icons.menu),
-            ),
             pinned: true,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(

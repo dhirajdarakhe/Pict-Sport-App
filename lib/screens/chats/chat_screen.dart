@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/chats/SportChatScreen.dart';
+import 'package:psa/screens/drawer/drawer.dart';
 
 class ChatScreen extends StatefulWidget {
 
@@ -16,24 +17,36 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     double height=MediaQuery.of(context).size.height;
     double width=MediaQuery.of(context).size.width;
-    return Column(
-      children: [
-        const SizedBox(height: 80,),
-        Expanded(
-          child: ListView.builder(
-              itemCount: UserDetails.mySportsList!.length,
-              itemBuilder: (ctx, index) => SportGrpNameWidget(
-                lastMsg: '3:22 PM   ',
-                onTap: (){
-                  Navigator.of(context)
-                      .pushNamed(SportChatScreen.routeName,
-                    arguments: UserDetails.mySportsList![index],);
-                },
-                name: UserDetails.mySportsList![index],
-                imag: UserDetails.mySportEmoji![index],
-              )),
-        ),
-      ],
+    return Scaffold(
+      drawer: const Drawer(
+        child: App_Drawer(),
+      ),
+      appBar: AppBar(
+        title: const Text('Chat Screen',style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),),
+      ),
+      body: Column(
+        children: [
+          //const SizedBox(height: 80,),
+          Expanded(
+            child: ListView.builder(
+                itemCount: UserDetails.mySportsList!.length,
+                itemBuilder: (ctx, index) => SportGrpNameWidget(
+                  lastMsg: '3:22 PM   ',
+                  onTap: (){
+                    Navigator.of(context)
+                        .pushNamed(SportChatScreen.routeName,
+                      arguments: UserDetails.mySportsList![index],);
+                  },
+                  name: UserDetails.mySportsList![index],
+                  imag: UserDetails.mySportEmoji![index],
+                )),
+          ),
+        ],
+      ),
     );
   }
 }
