@@ -151,27 +151,6 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                       ]),
             )
           ],
-          // actions: [
-          //   IconButton(onPressed: (){
-          //     Navigator.push(context, MaterialPageRoute(builder: (context){
-          //       return Request();
-          //     }));
-          //   },
-          //       icon: const Icon(Icons.request_page_outlined,size: 30,)),
-          //   IconButton(onPressed: (){
-          //     Navigator.push(context, MaterialPageRoute(builder: (context){
-          //       return Playing();
-          //     }));
-          //   },
-          //       icon: const Icon(Icons.change_history_outlined,size: 30,)),
-          //   IconButton(onPressed: (){
-          //     Navigator.push(context, MaterialPageRoute(builder: (context){
-          //       return ReturnScreen();
-          //     }));
-          //   },
-          //       // icon: const Icon(Icons.read_more_outlined,size: 30,)),
-          //       icon: const Icon(Icons.compare_arrows,size: 30,)),
-          // ],
         ),
         body: RefreshIndicator(
           onRefresh: () => getStatus(context),
@@ -239,47 +218,24 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        // TTWidget(
-                        //   tableNumber: '01',
-                        //   enrolledSeats: racket1,
-                        //   image: "assets/table_tenis_1.jpg",
-                        // ),
-                        // const SizedBox(
-                        //   height: 15,
-                        // ),
-                        // TTWidget(
-                        //     image: "assets/table_tenis_2.jpg",
-                        //     enrolledSeats: racket2,
-                        //     tableNumber: '02'),
-                        // const SizedBox(
-                        //   height: 15,
-                        // ),
-                        // TTWidget(
-                        //   image: "assets/table_tenis_1.jpg",
-                        //   enrolledSeats: racket3,
-                        //   tableNumber: '03',
-                        // ),aea28c
                         table_image(
                           totalseats: 4,
                           image: "assets/table_tennis_22.png",
                           tableNumber: '01',
                           enrolledSeats: racket1,
                         ),
-
                         table_image(
                           totalseats: 4,
                           image: "assets/table_tennis_11.png",
                           tableNumber: '02',
                           enrolledSeats: racket2,
                         ),
-
                         table_image(
                           totalseats: 4,
                           image: "assets/table_tennis_22.png",
                           tableNumber: '03',
                           enrolledSeats: racket3,
                         ),
-
                         const SizedBox(
                           height: 12,
                         ),

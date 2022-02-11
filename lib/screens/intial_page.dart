@@ -127,7 +127,7 @@ class _IntialScreenState extends State<IntialScreen> {
                 color: defaultBackgrdColor,
                 child: BuildPageConnector(),
               ),
-              Container(
+              /*Container(
                 height: 70,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -207,7 +207,7 @@ class _IntialScreenState extends State<IntialScreen> {
                     ),
                   ],
                 ),
-              ),
+              ),*/
             ],
           ),
         ),
