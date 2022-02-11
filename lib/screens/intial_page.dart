@@ -36,6 +36,7 @@ class _IntialScreenState extends State<IntialScreen> {
         pageChanged(index);
       },
       children: const <Widget>[
+        // Profile_Screen(),
         HomeScreen(),
         ChatScreen(),
         Announcement_Screen(),
@@ -55,7 +56,7 @@ class _IntialScreenState extends State<IntialScreen> {
   SnakeShape snakeShape = SnakeShape.indicator;
 
   bool showSelectedLabels = true;
-  bool showUnselectedLabels = true;
+  bool showUnselectedLabels = false;
 
   Color selectedColor = Colors.white;
   Color unselectedColor = Colors.red;
@@ -88,7 +89,8 @@ class _IntialScreenState extends State<IntialScreen> {
 
         ///configuration for SnakeNavigationBar.color
         snakeViewColor: selectedColor,
-        selectedItemColor: const Color(0xFF6A1B9A),
+        // selectedItemColor: const Color(0xFF6A1B9A),
+        selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
 
         showUnselectedLabels: showUnselectedLabels,
@@ -104,7 +106,7 @@ class _IntialScreenState extends State<IntialScreen> {
         items: [
           const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           const BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-          const BottomNavigationBarItem(icon: Icon(Icons.notifications,), label: 'Notification'),
+          const BottomNavigationBarItem(icon: Icon(Icons.notifications,), label: 'Notifi...'),
           const BottomNavigationBarItem(icon: Icon(Icons.calendar_today_outlined), label: 'Calendar'),
           BottomNavigationBarItem(icon: Padding(
             padding: const EdgeInsets.only(bottom: 1),
@@ -125,12 +127,12 @@ class _IntialScreenState extends State<IntialScreen> {
                 color: defaultBackgrdColor,
                 child: BuildPageConnector(),
               ),
-              Container(
-                height: 80,
+              /*Container(
+                height: 70,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
+                    // bottomLeft: Radius.circular(30),
+                    // bottomRight: Radius.circular(30),
                   ),
                   color: Color(0xFF9C27B0),
                 ),
@@ -205,7 +207,7 @@ class _IntialScreenState extends State<IntialScreen> {
                     ),
                   ],
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

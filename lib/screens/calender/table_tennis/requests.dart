@@ -18,6 +18,7 @@ class _RequestState extends State<Request> {
         child: Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Table Tennis Requests'),
       ),
       body: StreamBuilder<QuerySnapshot>(

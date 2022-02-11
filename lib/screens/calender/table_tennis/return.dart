@@ -11,6 +11,7 @@ class ReturnScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            centerTitle: true,
             title: const Text('Rackets Returned'),
           ),
           body: StreamBuilder<QuerySnapshot>(
