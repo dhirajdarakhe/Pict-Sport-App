@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/calender/table_tennis/widget.dart';
+import 'package:psa/screens/Home/table_tennis/widget.dart';
 
 class Request extends StatefulWidget {
   const Request({Key? key}) : super(key: key);

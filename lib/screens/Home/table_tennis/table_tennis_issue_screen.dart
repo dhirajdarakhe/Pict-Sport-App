@@ -6,7 +6,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/calender/table_tennis/table_tannis_main_screen.dart';
+import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 
 //bool requested=false;
 

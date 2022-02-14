@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/calender/table_tennis/playing.dart';
-import 'package:psa/screens/calender/table_tennis/popUpWidget.dart';
-import 'package:psa/screens/calender/table_tennis/requests.dart';
-import 'package:psa/screens/calender/table_tennis/return.dart';
-import 'package:psa/screens/calender/table_tennis/table_status_popup.dart';
-import 'package:psa/screens/calender/table_tennis/table_tennis_issue_screen.dart';
+import 'package:psa/screens/Home/table_tennis/playing.dart';
+import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
+import 'package:psa/screens/Home/table_tennis/requests.dart';
+import 'package:psa/screens/Home/table_tennis/return.dart';
+import 'package:psa/screens/Home/table_tennis/table_status_popup.dart';
+import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 
 class TabletannisScreen extends StatefulWidget {
   @override

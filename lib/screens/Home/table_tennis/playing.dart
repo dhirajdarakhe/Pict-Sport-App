@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:psa/screens/calender/table_tennis/requests.dart';
-import 'package:psa/screens/calender/table_tennis/widget.dart';
+import 'package:psa/screens/Home/table_tennis/widget.dart';
 
 
 //Aceppted request
