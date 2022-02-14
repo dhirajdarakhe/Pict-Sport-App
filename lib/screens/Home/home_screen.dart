@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:psa/models/sport.dart';
-import 'package:psa/widgets/sports_card.dart';
+import 'package:psa/screens/Home/sport.dart';
+import 'package:psa/models/userDetails.dart';
+import 'package:psa/screens/Home/sports_card.dart';
+import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
+
+import 'Basketball/basketball.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,19 +20,37 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
+
+  List<Sport> myList = [];
+
+  void mySportList()
+  {
+    myList.clear();
+    for(int i=0;i<UserDetails.mySportsList!.length;i++){
+      if (UserDetails.mySportsList![i]=='BasketBall'){
+        myList.add(item4);
+      }else if (UserDetails.mySportsList![i]=='VolleyBall'){
+        myList.add(item5);
+      }else if (UserDetails.mySportsList![i]=='TableTennis'){
+        myList.add(item2);
+      }else if (UserDetails.mySportsList![i]=='Badminton'){
+        myList.add(item6);
+      }else if (UserDetails.mySportsList![i]=='Cricket'){
+        myList.add(item3);
+      }else if (UserDetails.mySportsList![i]=='FootBall'){
+        myList.add(item1);
+      }else if (UserDetails.mySportsList![i]=='Chess'){
+        myList.add(item7);
+      }else if (UserDetails.mySportsList![i]=='Gym'){
+        myList.add(item8);
+      }
+    }
+  }
+
   @override
   void initState() {
-    List<Sport> myList = [
-      item1,
-      item2,
-      item3,
-      item4,
-      item5,
-      item6,
-      item7,
-      item8,
-    ];
-    myList.addAll(List.from(myList));
+    mySportList();
+    //myList.addAll(List.from(myList));
     scrollController.addListener(onListen);
     super.initState();
   }
@@ -41,16 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Sport> myList = [
-      item1,
-      item2,
-      item3,
-      item4,
-      item5,
-      item6,
-      item7,
-      item8,
-    ];
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 0, right: 0, top: 0),
@@ -62,24 +74,24 @@ class _HomeScreenState extends State<HomeScreen> {
               actions: [
                 Container(
                   margin: const EdgeInsets.only(right: 16),
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     backgroundImage: NetworkImage(
-                      'https://picsum.photos/250?image=9',
+                      UserDetails.photourl.toString(),
                     ),
                   ),
                 ),
               ],
               pinned: true,
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
+                /*borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
-                ),
+                ),*/
               ),
               expandedHeight: MediaQuery.of(context).size.height * 0.35,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
-                title: const Text('Hello: Username'),
+                title: const Text('PICT SPORTS APP'),
                 background: Container(
                   decoration: const BoxDecoration(
                     color: Colors.blue,
@@ -115,6 +127,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         alignment: Alignment.center,
                         transform: Matrix4.identity()..scale(scale, 1.0),
                         child: SportsCard(
+                          (){
+                            if (sport.name=='Table Tennis'){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return TabletannisScreen();
+                              }));
+                            }else if (sport.name=='Basketball'){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return BasketBall_screen();
+                              }));
+                            }else{
+
+                            }
+                          },
                           index,
                           sport,
                         ),

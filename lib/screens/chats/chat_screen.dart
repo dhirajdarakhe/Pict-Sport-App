@@ -11,42 +11,30 @@ class ChatScreen extends StatefulWidget {
   _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends State<ChatScreen>{
 
   @override
   Widget build(BuildContext context) {
     double height=MediaQuery.of(context).size.height;
     double width=MediaQuery.of(context).size.width;
-    return Scaffold(
-      drawer: const Drawer(
-        child: App_Drawer(),
-      ),
-      appBar: AppBar(
-        title: const Text('Chat Screen',style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),),
-      ),
-      body: Column(
-        children: [
-          //const SizedBox(height: 80,),
-          Expanded(
-            child: ListView.builder(
-                itemCount: UserDetails.mySportsList!.length,
-                itemBuilder: (ctx, index) => SportGrpNameWidget(
-                  lastMsg: '3:22 PM   ',
-                  onTap: (){
-                    Navigator.of(context)
-                        .pushNamed(SportChatScreen.routeName,
-                      arguments: UserDetails.mySportsList![index],);
-                  },
-                  name: UserDetails.mySportsList![index],
-                  imag: UserDetails.mySportEmoji![index],
-                )),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        //const SizedBox(height: 80,),
+        Expanded(
+          child: ListView.builder(
+              itemCount: UserDetails.mySportsList!.length,
+              itemBuilder: (ctx, index) => SportGrpNameWidget(
+                lastMsg: '3:22 PM   ',
+                onTap: (){
+                  Navigator.of(context)
+                      .pushNamed(SportChatScreen.routeName,
+                    arguments: UserDetails.mySportsList![index],);
+                },
+                name: UserDetails.mySportsList![index],
+                imag: UserDetails.mySportEmoji![index],
+              )),
+        ),
+      ],
     );
   }
 }
