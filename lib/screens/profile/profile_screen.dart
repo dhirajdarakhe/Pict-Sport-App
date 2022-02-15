@@ -34,7 +34,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+          // physics: const BouncingScrollPhysics(),
           child: Column(
             children: <Widget>[
               StackContainer2(),

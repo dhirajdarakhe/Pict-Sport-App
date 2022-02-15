@@ -4,10 +4,11 @@ import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 import 'top_bar.dart';
 
 class StackContainer extends StatelessWidget {
-String? imageUrl ;
-String? name;
-String? misId;
-StackContainer({required this.misId,required this.imageUrl, required this.name});
+  String? imageUrl;
+  String? name;
+  String? misId;
+  StackContainer(
+      {required this.misId, required this.imageUrl, required this.name});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +19,7 @@ StackContainer({required this.misId,required this.imageUrl, required this.name})
             clipper: MyCustomClipper(),
             child: Container(
               height: 300.0,
-              decoration:   BoxDecoration(
+              decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
                     color: Colors.blue.withOpacity(0.5),
@@ -27,9 +28,10 @@ StackContainer({required this.misId,required this.imageUrl, required this.name})
                     offset: const Offset(6, 3), // changes position of shadow
                   ),
                 ],
-              //BoxShadow
+                //BoxShadow
                 image: const DecorationImage(
-                  image: NetworkImage("https://media.istockphoto.com/photos/sports-equipment"
+                  image: NetworkImage(
+                      "https://media.istockphoto.com/photos/sports-equipment"
                       "-on-green-grass-top-view-picture-id905105146?k=20&m=905105146&s=612x612&w=0&h=c-PRgfs29opGsRl_vOnVxZVGnR5YsZyOJ-RPo_gVW7o="),
                   fit: BoxFit.cover,
                 ),
@@ -37,7 +39,7 @@ StackContainer({required this.misId,required this.imageUrl, required this.name})
             ),
           ),
           Align(
-            alignment:  const Alignment(0, 1),
+            alignment: const Alignment(0, 1),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -66,51 +68,46 @@ StackContainer({required this.misId,required this.imageUrl, required this.name})
                   ),
                 ),
                 const SizedBox(height: 10.0),
-                 Text(
+                Text(
                   name!,
                   style: const TextStyle(
-                    fontSize: 21.0,color: Colors.black,
+                    fontSize: 21.0,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const Text(
                   "PICT, PUNE",
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    color: Colors.black
-                  ),
+                  style: TextStyle(fontSize: 12.0, color: Colors.black),
                 ),
-                misId![0].toString() == 'C' ||
-                    misId![0].toString() == 'c'
+                misId![0].toString() == 'C' || misId![0].toString() == 'c'
                     ? const Text(
-                  'Computer Department',
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.grey,
-                    fontStyle: FontStyle.italic,
-                  ),
-                )
-                    : misId![0] == 'I' ||
-                    misId![0] == 'i'
-                    ? const Text(
-                  'Information Technology',
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.grey,
-                    fontStyle: FontStyle.italic,
-                  ),
-                )
-                    : misId![0] == 'E' ||
-                    misId![0] == 'e'
-                    ? const Text(
-                  'Electronics Department',
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.grey,
-                    fontStyle: FontStyle.italic,
-                  ),
-                )
-                    : Container(),
+                        'Computer Department',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      )
+                    : misId![0] == 'I' || misId![0] == 'i'
+                        ? const Text(
+                            'Information Technology',
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.grey,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          )
+                        : misId![0] == 'E' || misId![0] == 'e'
+                            ? const Text(
+                                'Electronics Department',
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  color: Colors.grey,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              )
+                            : Container(),
               ],
             ),
           ),
@@ -120,4 +117,3 @@ StackContainer({required this.misId,required this.imageUrl, required this.name})
     );
   }
 }
-
