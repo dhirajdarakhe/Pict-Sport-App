@@ -61,7 +61,7 @@ class _IntialScreenState extends State<IntialScreen> {
   Color selectedColor = Colors.white;
   Color unselectedColor = Colors.red;
 
-  Color defaultBackgrdColor = Colors.grey;
+  Color defaultBackgrdColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -85,13 +85,13 @@ class _IntialScreenState extends State<IntialScreen> {
         snakeShape: snakeShape,
         shape: bottomBarShape,
         padding: padding,
-        backgroundColor: const Color(0xFF9C27B0),
-
+        // backgroundColor: const Color(0xFF9C27B0),
+  backgroundColor:  Colors.white,
         ///configuration for SnakeNavigationBar.color
         snakeViewColor: selectedColor,
         // selectedItemColor: const Color(0xFF6A1B9A),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
 
         showUnselectedLabels: showUnselectedLabels,
         showSelectedLabels: showSelectedLabels,

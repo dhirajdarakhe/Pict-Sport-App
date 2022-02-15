@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
+import 'package:psa/screens/drawer/drawer.dart';
 import 'package:psa/screens/profile/helper/widget/custom_clipper2.dart';
 import '../../profile_edit_srcreen.dart';
 
@@ -15,6 +16,8 @@ class StackContainer2 extends StatelessWidget {
       children: <Widget>[
         Stack(
           children: <Widget>[
+
+
             ClipPath(
               clipper: MyCustomClipper2(),
               child: Container(
@@ -62,6 +65,31 @@ class StackContainer2 extends StatelessWidget {
               ),
             ),
             Positioned(
+              top: 8,
+              left: 6,
+              child: IconButton(
+                icon: const Icon(
+                  Icons.menu,
+                  size: 29,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+
+                  // App_Drawer(
+                  //
+                  // );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return const App_Drawer();
+                  //     },
+                  //   ),
+                  // );
+                },
+              ),
+            ),
+            Positioned(
               top: 170,
               left: 2,
               child: Column(
@@ -87,6 +115,15 @@ class StackContainer2 extends StatelessWidget {
                       ),
                     ),
                   ),
+                  // IconButton(
+                  //   icon: const FaIcon(
+                  //     FontAwesomeIcons.rocketchat,
+                  //     size: 30,color: Colors.black,
+                  //   ),
+                  //   onPressed: () {
+                  //     print('do something');
+                  //   },
+                  // ),
                   // const SizedBox(height: 10.0),
                   // Padding(
                   //   padding: const EdgeInsets.only(left: 8.0),
