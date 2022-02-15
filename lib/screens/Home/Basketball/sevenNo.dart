@@ -5,14 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 
-class SixNo extends StatefulWidget {
-  const SixNo({Key? key}) : super(key: key);
+class SevenNo extends StatefulWidget {
+  const SevenNo({Key? key}) : super(key: key);
 
   @override
-  _SixNoState createState() => _SixNoState();
+  _SevenNoState createState() => _SevenNoState();
 }
 
-class _SixNoState extends State<SixNo> {
+class _SevenNoState extends State<SevenNo> {
   final formatYMDHM = DateFormat("yyyy-MM-dd HH:mm");
   DateTime? eventDate = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
@@ -25,7 +25,7 @@ class _SixNoState extends State<SixNo> {
     await FirebaseFirestore.instance
         .collection('BBEquipment')
         .doc(UserDetails.uid).set({
-      'size':6,
+      'size':7,
       'timeOfIssue':Timestamp.now(),
       'timeOfReturn':Timestamp.now(),
       'isRequested':1,
@@ -33,17 +33,18 @@ class _SixNoState extends State<SixNo> {
       'noOfBall':choosedBall,
       'name':UserDetails.name,
       'misId':UserDetails.misId,
-      'url':UserDetails.photourl,
+      'photourl':UserDetails.photourl,
       'uid':UserDetails.uid,
     });
     Navigator.pop(context);
   }
 
+
   @override
   Widget build(BuildContext context) {
     double hei=MediaQuery.of(context).size.height;
     double wei=MediaQuery.of(context).size.width;
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: Colors.grey.withOpacity(0.5),
       body: Container(
         height: double.infinity,
@@ -67,11 +68,11 @@ class _SixNoState extends State<SixNo> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: const [
                         Text('Ball Size',style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20
                         ),),
-                        Text('6',style: TextStyle(
+                        Text('7',style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 20
@@ -83,11 +84,11 @@ class _SixNoState extends State<SixNo> {
                       //crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                      const Text('Number of Balls',style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20
-                      ),),
+                        const Text('Number of Balls',style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20
+                        ),),
                         DropDown(
                             ItemList: const ['1', '2', '3', '4'],
                             item1: 'Ball',
@@ -164,8 +165,8 @@ class _SixNoState extends State<SixNo> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.circular(20)),
+                    color: Colors.redAccent,
+                    borderRadius: BorderRadius.circular(20)),
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('Submit',style: TextStyle(
