@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/screens/Home/table_tennis/widget.dart';
-
-
 //Aceppted request
 
 class Playing extends StatelessWidget {
@@ -33,6 +31,7 @@ class Playing extends StatelessWidget {
                   itemCount: reqMembers.length,
                   itemBuilder: (ctx, index) => reqMembers[index]['isRequested'] == 2
                       ? RequestWidget(
+                    uid: reqMembers[index]['uid'],
                     returnTime: reqMembers[index]['timeOfReturn'],
                     requestScreen: true,
                     isViewing: true,

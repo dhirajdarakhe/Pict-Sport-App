@@ -47,6 +47,7 @@ class _RequestState extends State<Request> {
                       tableNumber: reqMembers[index]['tableNumber'],
                       racketNumber: reqMembers[index]['racketNumber'],
                       time: reqMembers[index]['timeOfIsuue'],
+                uid: reqMembers[index]['uid'],
                     )
                   : Container());
         },

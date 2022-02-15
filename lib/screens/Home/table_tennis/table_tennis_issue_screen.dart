@@ -77,6 +77,7 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
         'isRequested':1,
         'isReturn':false,
         'timeOfReturn':Timestamp.now(),
+        'uid': UserDetails.uid,
       });
 
       setState(() {

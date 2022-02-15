@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/drawer/drawer.dart';
 import 'package:psa/screens/profile/helper/widget/custom_clipper2.dart';
 import '../../profile_edit_srcreen.dart';
 
@@ -16,8 +15,6 @@ class StackContainer2 extends StatelessWidget {
       children: <Widget>[
         Stack(
           children: <Widget>[
-
-
             ClipPath(
               clipper: MyCustomClipper2(),
               child: Container(
