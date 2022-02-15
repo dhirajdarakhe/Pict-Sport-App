@@ -30,6 +30,7 @@ class ReturnScreen extends StatelessWidget {
                   itemCount: reqMembers.length,
                   itemBuilder: (ctx, index) => reqMembers[index]['isReturn']
                       ? RequestWidget(
+                    uid: reqMembers[index]['uid'],
                     returnTime: reqMembers[index]['timeOfReturn'],
                     requestScreen: false,
                     isAdmin: false,

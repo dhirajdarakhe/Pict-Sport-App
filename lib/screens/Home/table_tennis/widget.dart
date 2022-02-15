@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
 
 class RequestWidget extends StatefulWidget {
@@ -16,9 +15,10 @@ class RequestWidget extends StatefulWidget {
   late Timestamp time;
   late Timestamp returnTime;
   bool requestScreen;
+  late String uid;
 
   RequestWidget(
-      {
+      {required this.uid,
         required this.returnTime,
         required this.requestScreen,
         required this.isAdmin,
@@ -235,7 +235,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                         onTap: () async {
                                           await FirebaseFirestore.instance
                                               .collection('TTEquipment')
-                                              .doc(UserDetails.uid)
+                                              .doc(widget.uid)
                                               .update({
                                             'isRequested': 2,
                                           });
@@ -268,7 +268,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                         onTap: () async {
                                           await FirebaseFirestore.instance
                                               .collection('TTEquipment')
-                                              .doc(UserDetails.uid)
+                                              .doc(widget.uid)
                                               .update({
                                             'isRequested': 5,
                                           });
@@ -282,7 +282,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                       ); //---------
                                     });
                               },
-                              color: Color(0xfff76463),
+                              color: const Color(0xfff76463),
                               splashColor: Colors.lightBlueAccent,
                               elevation: 10.0,
                               shape: const StadiumBorder(),
